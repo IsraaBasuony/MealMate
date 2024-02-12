@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#748E63"
-    tools:context=".SignInFragment">
+    tools:context=".signIn.view.SignInFragment">
 
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/dish1"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginStart="360dp"
+        android:layout_marginStart="340dp"
         android:layout_marginTop="28dp"
         android:src="@drawable/back3"
         app:civ_border_color="@color/primary_button"
@@ -25,9 +23,9 @@
         android:id="@+id/dish2"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginTop="212dp"
+        android:layout_marginTop="300dp"
         android:layout_marginEnd="280dp"
-        android:src="@drawable/back4"
+        android:src="@drawable/back"
         app:civ_border_color="@color/primary_button"
         app:civ_border_width="2dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +37,7 @@
         android:layout_height="140dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="312dp"
-        android:src="@drawable/back"
+        android:src="@drawable/back4"
         app:civ_border_color="@color/primary_button"
         app:civ_border_width="2dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +47,7 @@
         android:id="@+id/dish4"
         android:layout_width="180dp"
         android:layout_height="180dp"
-        android:layout_marginTop="600dp"
+        android:layout_marginTop="650dp"
         android:src="@drawable/back11"
         app:civ_border_color="@color/primary_button"
         app:civ_border_width="2dp"
@@ -61,7 +59,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#8D040404"
+        android:background="#57040404"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.3" />
@@ -84,49 +82,65 @@
             style="@style/poppinsBold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:text="Sign in"
             android:textAlignment="center"
             android:textColor="@color/primary"
             android:textSize="36sp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/login_email_layout"
+            android:id="@+id/UserNameLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:hint="Email"
-            app:boxStrokeColor="@color/primary">
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/primary"
+            app:cursorColor="@color/primary"
+            app:errorEnabled="true"
+            app:hintTextColor="@color/primary"
+            app:startIconDrawable="@drawable/alternate_email"
+            app:startIconTint="@color/primary">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/login_email"
+                android:id="@+id/UserNameEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/person"
-                android:drawablePadding="8dp"
-                android:padding="8dp"
-                android:textColor="@color/white"
-                app:errorEnabled="true" />
+                android:textSize="18sp"
 
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/login_password_layout"
+            android:id="@+id/passwordLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:hint="Password">
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:hint="Password"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/primary"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"
+            app:cursorColor="@color/primary"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/primary"
+            app:errorEnabled="true"
+            app:hintTextColor="@color/primary"
+            app:startIconDrawable="@drawable/lock"
+            app:startIconTint="@color/primary">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/login_password"
+                android:id="@+id/PasswordEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/lock"
-                android:drawablePadding="8dp"
                 android:inputType="textPassword"
-                android:padding="8dp"
-                android:textColor="@color/black" />
+                android:maxLength="20"
+                android:textSize="18dp"
 
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -134,22 +148,28 @@
             style="@style/poppinsBold"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:backgroundTint="@color/primary_button"
             android:text="@string/sign_in"
             android:textSize="18sp"
             app:cornerRadius="20dp" />
 
-        <TextView
-            android:id="@+id/forgot_password"
-            style="@style/poppinsRegular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:padding="8dp"
-            android:text="Forgot Password?"
-            android:textColor="@color/primary"
-            android:textSize="16sp" />
+        <Button
+            android:id="@+id/google"
+            style="@style/poppinsBold"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/secondry_butto"
+            android:text="@string/continue_with_google"
+            android:textSize="18sp"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/googleg_standard_color_18"
+            app:iconTintMode="multiply" />
 
 
         <TextView

@@ -1,14 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUpFragment">
+    tools:context=".signUp.view.SignUpFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/dish1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="340dp"
+        android:layout_marginTop="28dp"
+        android:src="@drawable/back3"
+        app:civ_border_color="@color/primary_button"
+        app:civ_border_width="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/dish2"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginEnd="280dp"
+        android:src="@drawable/back"
+        app:civ_border_color="@color/primary_button"
+        app:civ_border_width="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/dish3"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="312dp"
+        android:src="@drawable/back4"
+        app:civ_border_color="@color/primary_button"
+        app:civ_border_width="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/dish4"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="650dp"
+        android:src="@drawable/back11"
+        app:civ_border_color="@color/primary_button"
+        app:civ_border_width="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="#57040404"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.3" />
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="16dp"
+        android:background="@drawable/custom_edittext"
+        android:orientation="vertical"
+        android:padding="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/loginText"
+            style="@style/poppinsBold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign up"
+            android:textAlignment="center"
+            android:textColor="@color/primary"
+            android:textSize="36sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/UserNameLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            app:cursorColor="@color/primary"
+            android:layout_marginEnd="10dp"
+            android:hint="Username"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/primary"
+            app:errorEnabled="true"
+            app:hintTextColor="@color/primary"
+            app:startIconTint="@color/primary"
+            app:startIconDrawable="@drawable/person"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/UserNameEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+
+
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/EmailLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:hint="Email"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/primary"
+            app:errorEnabled="true"
+            app:cursorColor="@color/primary"
+            app:hintTextColor="@color/primary"
+            app:startIconTint="@color/primary"
+            app:startIconDrawable="@drawable/alternate_email"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/EmailEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:hint="Password"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/primary"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"
+            app:endIconMode="password_toggle"
+            app:errorEnabled="true"
+            app:cursorColor="@color/primary"
+            app:hintTextColor="@color/primary"
+            app:endIconTint="@color/primary"
+            app:startIconTint="@color/primary"
+            app:startIconDrawable="@drawable/lock"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/PasswordEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:maxLength="20"
+                android:textSize="18dp"
+           />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/signup_button"
+            style="@style/poppinsBold"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/primary_button"
+            android:text="@string/sign_up"
+            android:textSize="18sp"
+            app:cornerRadius="20dp" />
+
+
+        <TextView
+            android:id="@+id/loginRedirectText"
+            style="@style/poppinsRegular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="8dp"
+            android:text="Already an user? Login"
+            android:textAlignment="center"
+            android:textColor="@color/primary"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

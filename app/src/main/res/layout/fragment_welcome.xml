@@ -45,12 +45,15 @@
         style="@style/poppinsMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/enjoy_your_every_meal_with_us"
+        android:text="@string/cooke_at_home_n_like_a_professional_chef"
         android:textColor="@color/primary"
-        android:textSize="24dp"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appName" />
+        app:layout_constraintTop_toBottomOf="@id/appName"
+       android:maxLines="2"
+        android:gravity="center"
+        />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/login_button"
@@ -60,7 +63,7 @@
         android:layout_marginBottom="8dp"
         android:backgroundTint="#94E44B1A"
         android:text="@string/sign_in"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:cornerRadius="20dp"
         app:layout_constraintBottom_toTopOf="@+id/signup_button"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +79,7 @@
         android:layout_marginBottom="8dp"
         android:backgroundTint="#7AF59E5D"
         android:text="@string/sign_up"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:cornerRadius="20dp"
         app:layout_constraintBottom_toTopOf="@id/skip"
         app:layout_constraintEnd_toEndOf="parent"

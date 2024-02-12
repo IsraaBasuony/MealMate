@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.iti.mealmate.databinding.FragmentWelcomeBinding;
 
+
 public class WelcomeFragment extends Fragment {
 
     FragmentWelcomeBinding binding;
@@ -39,6 +40,19 @@ public class WelcomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.action_welcomeFragment_to_signInFragment);
+            }
+        });
+
+        binding.signupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_welcomeFragment_to_signUpFragment3);
+            }
+        });
+        binding.skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_welcomeFragment_to_homeFragment);
             }
         });
 

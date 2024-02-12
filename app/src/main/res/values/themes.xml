@@ -1,9 +1,21 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.MealMate" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-    </style>
+<!-- Base application theme. -->
+<style name="Base.Theme.MealMate" parent="Theme.Material3.DayNight.NoActionBar">
 
-    <style name="Theme.MealMate" parent="Base.Theme.MealMate" />
+    <item name="colorPrimary">@color/primary</item>
+    <item name="colorPrimaryVariant">@color/primary_button</item>
+    <item name="colorOnPrimary">@color/white</item>
+    <!-- Secondary brand color. -->
+    <item name="colorSecondary">@color/secondry</item>
+    <item name="colorSecondaryVariant">@color/secondry_butto</item>
+    <item name="colorOnSecondary">@color/black</item>
+    <!-- Status bar color. -->
+    <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+    <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
+</style>
+<style name="Theme.MealMate" parent="Base.Theme.MealMate" />
+    <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
+    </style>
 </resources>

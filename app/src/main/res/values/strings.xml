@@ -1,13 +1,19 @@
 <resources>
     <string name="app_name">MealMate</string>
-    <string name="cooke_at_home_n_like_a_professional_chef">Cooke at Home\nLike a Professional Chef</string>
+    <string name="cooke_at_home_n_like_a_professional_chef">Cooke at Home \nLike a Professional Chef.</string>
     <string name="enjoy_your_every_meal_with_us">Enjoy your every meal with us.</string>
     <string name="mealmate">MealMate</string>
-    <string name="required">"Empty fields are not allowed"</string>
+    <string name="required">"required*"</string>
     <string name="pass_validation">Weak pass! must > 6 digits</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login">Login</string>
     <string name="sign_in">sign in</string>
     <string name="sign_up">sign up</string>
     <string name="skip">Skip</string>
+    <string name="continue_with_google">With Google</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="favorites">Favorites</string>
+    <string name="calender">Calender</string>
+    <string name="profile">Profile</string>
 </resources>
