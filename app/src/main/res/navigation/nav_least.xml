@@ -9,14 +9,14 @@
         android:id="@+id/homeFragment2"
         android:name="com.iti.mealmate.home.view.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment2_to_searchFragment2"
+            app:destination="@id/searchFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment2"
         android:name="com.iti.mealmate.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" >
-        <action
-            android:id="@+id/action_searchFragment2_to_homeFragment2"
-            app:destination="@id/homeFragment2" />
-    </fragment>
+        tools:layout="@layout/fragment_search" />
 </navigation>

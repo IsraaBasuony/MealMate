@@ -16,4 +16,5 @@
     <string name="favorites">Favorites</string>
     <string name="calender">Calender</string>
     <string name="profile">Profile</string>
+    <string name="today_s_suggested_meal">Today\'s suggested meal:</string>
 </resources>
