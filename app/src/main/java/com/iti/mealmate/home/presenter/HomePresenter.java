@@ -2,12 +2,13 @@ package com.iti.mealmate.home.presenter;
 
 import com.iti.mealmate.home.view.IViewHome;
 import com.iti.mealmate.model.MealModel;
+import com.iti.mealmate.network.NetworkCallbackAllMeals;
 import com.iti.mealmate.network.NetworkCallbackRandom;
 import com.iti.mealmate.repo.meal.MealsRepo;
 
 import java.util.List;
 
-public class HomePresenter implements IHomePresenter, NetworkCallbackRandom {
+public class HomePresenter implements IHomePresenter, NetworkCallbackRandom, NetworkCallbackAllMeals {
 
     private IViewHome _view;
     private MealsRepo _repo;
@@ -26,6 +27,7 @@ public class HomePresenter implements IHomePresenter, NetworkCallbackRandom {
     @Override
     public void getAllMeals() {
 
+        _repo.getAllMeals(this);
     }
 
 
@@ -38,5 +40,16 @@ public class HomePresenter implements IHomePresenter, NetworkCallbackRandom {
     public void onFailureRandomResult(String errorMsg) {
 
         _view.showErrMsg(errorMsg);
+    }
+
+    @Override
+    public void onSuccessAllMealsResult(List<MealModel> mealModelList) {
+        _view.showAllMeals(mealModelList);
+    }
+
+    @Override
+    public void onFailureAllMealsResult(String errorMsg) {
+        _view.showErrMsg(errorMsg);
+
     }
 }

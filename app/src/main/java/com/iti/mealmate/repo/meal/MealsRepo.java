@@ -1,6 +1,7 @@
 package com.iti.mealmate.repo.meal;
 
 
+import com.iti.mealmate.network.NetworkCallbackAllMeals;
 import com.iti.mealmate.network.NetworkCallbackRandom;
 import com.iti.mealmate.network.RemoteDataSource;
 
@@ -23,5 +24,10 @@ public class MealsRepo implements IMealsRepo {
     public void getRandom(NetworkCallbackRandom networkCallbackRandom) {
         remoteDataSource.enqueueCallAllRandom(networkCallbackRandom);
 
+    }
+
+    @Override
+    public void getAllMeals(NetworkCallbackAllMeals networkCallbackAllMeals) {
+        remoteDataSource.enqueueCallAllMeals(networkCallbackAllMeals);
     }
 }

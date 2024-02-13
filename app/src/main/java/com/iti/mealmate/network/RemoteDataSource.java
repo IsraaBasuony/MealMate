@@ -62,4 +62,27 @@ public class RemoteDataSource implements IRemoteDataSource {
         });
 
     }
+
+    @Override
+    public void enqueueCallAllMeals(NetworkCallbackAllMeals networkCallbackAllMeals) {
+        Call<MealModelList> call = apiCalls.getAllMealsByLetter("s");
+        call.enqueue(new Callback<MealModelList>() {
+            @Override
+            public void onResponse(Call<MealModelList> call, Response<MealModelList> response) {
+                if (response.isSuccessful()) {
+                    Log.i(TAG, "onResponse: callBack" + response.body().getMeals().get(0).getStrMeal());
+                    networkCallbackAllMeals.onSuccessAllMealsResult(response.body().getMeals());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MealModelList> call, Throwable t) {
+
+                Log.i(TAG, "onFailure: CallBack");
+                networkCallbackAllMeals.onFailureAllMealsResult(t.getMessage());
+                t.printStackTrace();
+            }
+        });
+
+    }
 }
