@@ -6,6 +6,7 @@ import android.util.Log;
 import com.iti.mealmate.model.CategoriesList;
 import com.iti.mealmate.model.CountriesList;
 import com.iti.mealmate.model.IngredientList;
+import com.iti.mealmate.model.MealList;
 import com.iti.mealmate.model.MealModel;
 import com.iti.mealmate.model.MealModelList;
 
@@ -154,5 +155,31 @@ public class RemoteDataSource implements IRemoteDataSource {
         });
 
     }
+
+    @Override
+    public void enqueueCallFullDetails(NetworkCallbackMealDetails networkCallbackMealDetails, String idMeal) {
+
+        Call<MealList> call = apiCalls.getFullDetailedMeal(idMeal);
+        call.enqueue(new Callback<MealList>() {
+            @Override
+            public void onResponse(Call<MealList> call, Response<MealList> response) {
+
+                if (response.isSuccessful()) {
+                    Log.i(TAG, "onResponse: random" + response.body().getMeals().get(0).getStrMeal());
+                    networkCallbackMealDetails.onSuccessRandomResult(response.body().getMeals());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MealList> call, Throwable t) {
+
+                Log.i(TAG, "onFailure: random");
+                networkCallbackMealDetails.onFailureRandomResult(t.getMessage());
+                t.printStackTrace();
+            }
+        });
+
+    }
+
 
 }

@@ -44,7 +44,6 @@ public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.MyVi
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Country country = countryList.get(position);
         holder.countryName.setText(countryList.get(position).getStrArea());
-        //holder.countryThumb.setImageResource(flagsSource.getImageResourceIdByName(countryList.get(position).getStrArea()));
     }
 
     @Override

@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -29,8 +31,6 @@ public class AllMealsAdapter extends RecyclerView.Adapter<AllMealsAdapter.MyView
        this.mealModelArrayList = _mealModelList;
   }
 
-
-
 //    public CategoriesAdapter(Context _context, OnCategoryClickListener _listener, ArrayList<Category> _categoryList) {
 //        this.context = _context;
 //        this.categoryList = _categoryList;
@@ -50,11 +50,13 @@ public class AllMealsAdapter extends RecyclerView.Adapter<AllMealsAdapter.MyView
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         MealModel mealModel = mealModelArrayList.get(position);
         holder.mealName.setText(mealModelArrayList.get(position).getStrMeal());
-
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.searchByMealId(mealModelArrayList.get(position).getIdMeal());
+                //listener.searchByMealId(mealModelArrayList.get(position).getStrMeal());
+                HomeFragmentDirections.ActionHomeFragment2ToFullDetailsFragment2 action = HomeFragmentDirections.actionHomeFragment2ToFullDetailsFragment2();
+                action.setMealID(mealModelArrayList.get(position).getIdMeal());
+                Navigation.findNavController(v).navigate(action);
             }
         });
         Glide.with(holder.itemView.getContext()).load(mealModelArrayList.get(position).getStrMealThumb())

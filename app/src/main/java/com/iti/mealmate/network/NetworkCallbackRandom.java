@@ -9,5 +9,4 @@ public interface NetworkCallbackRandom {
     public void onSuccessRandomResult(List<MealModel> mealModelList);
     public  void onFailureRandomResult(String errorMsg);
 
-
 }

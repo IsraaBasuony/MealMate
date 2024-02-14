@@ -38,6 +38,7 @@ public class HomeFragment extends Fragment implements IViewHome {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
     }
 
     @Override
@@ -66,11 +67,16 @@ public class HomeFragment extends Fragment implements IViewHome {
 
         binding.titleTxt.setText(mealModel.getStrMeal());
         binding.discribtionTxt.setText(mealModel.getStrInstructions());
+        binding.inspirationCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+
+            }
+        });
         Glide.with(requireContext())
                 .load(mealModel.getStrMealThumb())
                 .apply(new RequestOptions())
-                .placeholder(R.drawable.ic_launcher_foreground)
                 .error(R.drawable.ic_launcher_background)
                 .into(binding.inspirationImg);
     }

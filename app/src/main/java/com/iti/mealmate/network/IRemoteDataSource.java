@@ -8,5 +8,6 @@ public interface IRemoteDataSource {
 
     void  enqueueCallAllIngredient(NetworkCallbackIngredient networkCallbackIngredient);
     void  enqueueCallAllCountry(NetworkCallbackCountry networkCallbackCountry );
+    void  enqueueCallFullDetails(NetworkCallbackMealDetails networkCallbackMealDetails, String idMeal );
 
 }

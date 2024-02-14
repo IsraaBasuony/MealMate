@@ -6,53 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".search.view.SearchFragment">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/dish1"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="340dp"
-        android:layout_marginTop="28dp"
-        android:src="@drawable/back3"
-        app:civ_border_color="@color/primary_button"
-        app:civ_border_width="2dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/dish3"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="312dp"
-        android:src="@drawable/back4"
-        app:civ_border_color="@color/primary_button"
-        app:civ_border_width="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/dish4"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="688dp"
-        android:src="@drawable/back11"
-        app:civ_border_color="@color/primary_button"
-        app:civ_border_width="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#57040404"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.3" />
-
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -85,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.Chip.Filter"
-            app:chipCornerRadius="5dp"
+            app:chipCornerRadius="10dp"
             app:chipStrokeWidth="2dp"
             app:chipStrokeColor="@color/primary"
             android:text="Category" />
@@ -95,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.Chip.Filter"
-            app:chipCornerRadius="5dp"
+            app:chipCornerRadius="10dp"
             app:chipStrokeColor="@color/primary"
             app:chipStrokeWidth="2dp"
             android:text="Ingredient" />
@@ -105,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.Chip.Filter"
-            app:chipCornerRadius="5dp"
+            app:chipCornerRadius="10dp"
             app:chipStrokeWidth="2dp"
             app:chipStrokeColor="@color/primary"
             android:text="Country" />

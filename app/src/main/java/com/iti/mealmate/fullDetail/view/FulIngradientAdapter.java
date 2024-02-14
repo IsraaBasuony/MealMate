@@ -1,4 +1,4 @@
-package com.iti.mealmate.search.view;
+package com.iti.mealmate.fullDetail.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,34 +8,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.iti.mealmate.R;
-import com.iti.mealmate.model.Ingredient;
+import com.iti.mealmate.model.Meal;
 
 import java.util.ArrayList;
 
-public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.MyViewHolder> {
+public class FulIngradientAdapter extends RecyclerView.Adapter<FulIngradientAdapter.MyViewHolder> {
 
     private Context context;
-    private ArrayList<Ingredient> ingredientList;
-    private OnIngredientClickListener listener;
+    private ArrayList<Meal.IngredientMeasures> ingredientList;
 
-    public IngredientAdapter(Context _context ,ArrayList<Ingredient> _ingredientList) {
+    public FulIngradientAdapter(Context _context, ArrayList<Meal.IngredientMeasures> _ingredientList) {
         this.context = _context;
         this.ingredientList = _ingredientList;
     }
 
-
-
-//    public CategoriesAdapter(Context _context, OnCategoryClickListener _listener, ArrayList<Category> _categoryList) {
-//        this.context = _context;
-//        this.categoryList = _categoryList;
-//        this.listener = _listener;
-//    }
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,17 +34,12 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.My
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Ingredient ingredient = ingredientList.get(position);
-        holder.ingredientName.setText(ingredientList.get(position).getStrIngredient());
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.searchByIngredientName(ingredient.getStrIngredient());
-            }
-        });
-        String image=String.format("https://www.themealdb.com/images/ingredients/%s.png", ingredient.getStrIngredient());
+        Meal.IngredientMeasures ingredient = ingredientList.get(position);
+        holder.ingredientName.setText(ingredientList.get(position).getMeasure());
+
+        String image = String.format("https://www.themealdb.com/images/ingredients/%s.png", ingredient.getIngredient());
         Glide.with(context).load(image).apply(new RequestOptions()
-                        .override(80,80))
+                        .override(80, 80))
                 .placeholder(R.drawable.ic_launcher_foreground).error(R.drawable.ic_launcher_background).into(holder.ingredientThumb);
 
     }
@@ -64,27 +49,21 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.My
         return ingredientList != null ? ingredientList.size() : 0;
     }
 
-    public void setList(ArrayList<Ingredient> ingredientList) {
+    public void setList(ArrayList<Meal.IngredientMeasures> ingredientList) {
         this.ingredientList = ingredientList;
         notifyDataSetChanged();
-
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView ingredientName ;
+        TextView ingredientName;
         ImageView ingredientThumb;
-        CardView cardView;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             ingredientName = itemView.findViewById(R.id.ingrediant_txt);
             ingredientThumb = itemView.findViewById(R.id.ingrediant_img);
-            cardView = itemView.findViewById(R.id.ingrediant_card);
         }
     }
 }
 
-
-interface OnIngredientClickListener {
-    void searchByIngredientName(String categoryName);
-}

@@ -12,8 +12,4 @@ public class MealModelList {
     public ArrayList<MealModel> getMeals() {
         return meals;
     }
-
-    public void setMeals(ArrayList<MealModel> meals) {
-        this.meals = meals;
-    }
 }

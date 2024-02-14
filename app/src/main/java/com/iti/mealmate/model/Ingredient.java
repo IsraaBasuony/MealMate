@@ -5,7 +5,6 @@ public class Ingredient {
     private String idIngredient;
     private String  strIngredient;
     private String strDescription;
-
     public String getStrType() {
         return strType;
     }

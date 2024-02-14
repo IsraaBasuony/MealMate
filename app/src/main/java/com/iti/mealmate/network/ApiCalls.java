@@ -3,6 +3,7 @@ package com.iti.mealmate.network;
 import com.iti.mealmate.model.CategoriesList;
 import com.iti.mealmate.model.CountriesList;
 import com.iti.mealmate.model.IngredientList;
+import com.iti.mealmate.model.MealList;
 import com.iti.mealmate.model.MealModelList;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -25,5 +26,7 @@ public interface ApiCalls {
     @GET("list.php?a=list")
     Call<CountriesList> getAllCountries();
 
+    @GET("lookup.php")
+    Call<MealList> getFullDetailedMeal(@Query("i") String idMeal);
 
 }

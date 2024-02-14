@@ -6,5 +6,4 @@ public interface ISearchPresenter {
     public  void getAllIngredients();
     public void  getAllCountries();
 
-
 }
