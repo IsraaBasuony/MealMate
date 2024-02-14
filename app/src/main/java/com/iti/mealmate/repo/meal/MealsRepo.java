@@ -2,6 +2,9 @@ package com.iti.mealmate.repo.meal;
 
 
 import com.iti.mealmate.network.NetworkCallbackAllMeals;
+import com.iti.mealmate.network.NetworkCallbackCagtegory;
+import com.iti.mealmate.network.NetworkCallbackCountry;
+import com.iti.mealmate.network.NetworkCallbackIngredient;
 import com.iti.mealmate.network.NetworkCallbackRandom;
 import com.iti.mealmate.network.RemoteDataSource;
 
@@ -30,4 +33,22 @@ public class MealsRepo implements IMealsRepo {
     public void getAllMeals(NetworkCallbackAllMeals networkCallbackAllMeals) {
         remoteDataSource.enqueueCallAllMeals(networkCallbackAllMeals);
     }
+
+    @Override
+    public void getAllCategory(NetworkCallbackCagtegory networkCallbackCagtegory) {
+        remoteDataSource.enqueueCallAllCategory(networkCallbackCagtegory);
+
+    }
+
+    @Override
+    public void getAllIngredient(NetworkCallbackIngredient networkCallbackIngredient) {
+        remoteDataSource.enqueueCallAllIngredient(networkCallbackIngredient);
+    }
+
+    @Override
+    public void getAllCountry(NetworkCallbackCountry networkCallbackCountry) {
+
+        remoteDataSource.enqueueCallAllCountry(networkCallbackCountry);
+    }
+
 }

@@ -3,6 +3,9 @@ package com.iti.mealmate.network;
 import android.util.Log;
 
 
+import com.iti.mealmate.model.CategoriesList;
+import com.iti.mealmate.model.CountriesList;
+import com.iti.mealmate.model.IngredientList;
 import com.iti.mealmate.model.MealModel;
 import com.iti.mealmate.model.MealModelList;
 
@@ -47,7 +50,7 @@ public class RemoteDataSource implements IRemoteDataSource {
             public void onResponse(Call<MealModelList> call, Response<MealModelList> response) {
 
                 if (response.isSuccessful()) {
-                    Log.i(TAG, "onResponse: callBack" + response.body().getMeals().size());
+                    Log.i(TAG, "onResponse: random" + response.body().getMeals().size());
                     networkCallbackRandom.onSuccessRandomResult(response.body().getMeals());
                 }
             }
@@ -55,7 +58,7 @@ public class RemoteDataSource implements IRemoteDataSource {
             @Override
             public void onFailure(Call<MealModelList> call, Throwable t) {
 
-                Log.i(TAG, "onFailure: CallBack");
+                Log.i(TAG, "onFailure: random");
                 networkCallbackRandom.onFailureRandomResult(t.getMessage());
                 t.printStackTrace();
             }
@@ -70,7 +73,7 @@ public class RemoteDataSource implements IRemoteDataSource {
             @Override
             public void onResponse(Call<MealModelList> call, Response<MealModelList> response) {
                 if (response.isSuccessful()) {
-                    Log.i(TAG, "onResponse: callBack" + response.body().getMeals().get(0).getStrMeal());
+                    Log.i(TAG, "onResponse: Allmeals" + response.body().getMeals().get(0).getStrMeal());
                     networkCallbackAllMeals.onSuccessAllMealsResult(response.body().getMeals());
                 }
             }
@@ -78,11 +81,78 @@ public class RemoteDataSource implements IRemoteDataSource {
             @Override
             public void onFailure(Call<MealModelList> call, Throwable t) {
 
-                Log.i(TAG, "onFailure: CallBack");
+                Log.i(TAG, "onFailure:allmeals");
                 networkCallbackAllMeals.onFailureAllMealsResult(t.getMessage());
                 t.printStackTrace();
             }
         });
 
     }
+
+    @Override
+    public void enqueueCallAllCategory(NetworkCallbackCagtegory networkCallbackCagtegory) {
+        Call<CategoriesList> call = apiCalls.getAllCategories();
+        call.enqueue(new Callback<CategoriesList>() {
+            @Override
+            public void onResponse(Call<CategoriesList> call, Response<CategoriesList> response) {
+                if (response.isSuccessful()) {
+                    Log.i(TAG, "onResponse: category" + response.body().getCategories().size());
+                    networkCallbackCagtegory.onSuccessCategoryResult(response.body().getCategories());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CategoriesList> call, Throwable t) {
+                Log.i(TAG, "onFailure: category");
+                networkCallbackCagtegory.onFailureCategoryResult(t.getMessage());
+                t.printStackTrace();
+            }
+        });
+    }
+
+    @Override
+    public void enqueueCallAllIngredient(NetworkCallbackIngredient networkCallbackIngredient) {
+        Call<IngredientList> call = apiCalls.getAllIngredients();
+        call.enqueue((new Callback<IngredientList>() {
+            @Override
+            public void onResponse(Call<IngredientList> call, Response<IngredientList> response) {
+                if (response.isSuccessful()) {
+                    Log.i("Israa", "onResponse: Ingrediant" + response.body().getMeals().size());
+                    networkCallbackIngredient.onSuccessIngredientResult(response.body().getMeals());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<IngredientList> call, Throwable t) {
+
+                Log.i("Israa", "onFailure: Ingrediant");
+                networkCallbackIngredient.onFailureIngredientResult(t.getMessage());
+                t.printStackTrace();
+            }
+        }));
+    }
+
+    @Override
+    public void enqueueCallAllCountry(NetworkCallbackCountry networkCallbackCountry) {
+        Call<CountriesList>call = apiCalls.getAllCountries();
+        call.enqueue(new Callback<CountriesList>() {
+            @Override
+            public void onResponse(Call<CountriesList> call, Response<CountriesList> response) {
+                if (response.isSuccessful()) {
+                    Log.i("Israa", "onResponse: callBack country" + response.body().getMeals().size());
+                    networkCallbackCountry.onSuccessCountryResult(response.body().getMeals());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CountriesList> call, Throwable t) {
+                Log.i("Israa", "onFailure: countries");
+                networkCallbackCountry.onFailureCountryResult(t.getMessage());
+                t.printStackTrace();
+
+            }
+        });
+
+    }
+
 }
