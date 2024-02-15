@@ -29,4 +29,11 @@ public interface ApiCalls {
     @GET("lookup.php")
     Call<MealList> getFullDetailedMeal(@Query("i") String idMeal);
 
+    @GET("filter.php")
+    Call<MealModelList> getAllMealsByCategory(@Query("c") String category);
+    @GET("filter.php")
+    Call<MealModelList> getAllMealsByArea(@Query("a") String area);
+    @GET("filter.php")
+    Call<MealModelList>  getAllMealsByIngredient(@Query("i") String ingredient);
+
 }

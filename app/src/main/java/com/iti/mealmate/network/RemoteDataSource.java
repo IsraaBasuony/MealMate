@@ -181,5 +181,71 @@ public class RemoteDataSource implements IRemoteDataSource {
 
     }
 
+    @Override
+    public void enqueueCallMealsByIngredient(NetworkCallbackIngredientOne networkCallbackIngredientOne, String ingredientName) {
+        Call<MealModelList> call = apiCalls.getAllMealsByIngredient(ingredientName);
+        call.enqueue(new Callback<MealModelList>() {
+            @Override
+            public void onResponse(Call<MealModelList> call, Response<MealModelList> response) {
+                if (response.isSuccessful()) {
+                    Log.i(TAG, "onResponse: random" + response.body().getMeals().get(0).getStrMeal());
+                    networkCallbackIngredientOne.onIngredientNameSuccessfulResult(response.body().getMeals());
+                }
+            }
+            @Override
+            public void onFailure(Call<MealModelList> call, Throwable t) {
+                Log.i(TAG, "onFailure: random");
+                networkCallbackIngredientOne.onFailureIngredientNameResult(t.getMessage());
+                t.printStackTrace();
+            }
+        });
+
+    }
+
+    @Override
+    public void enqueueCallMealsByCategory(NetworkCallbackCategoryOne networkCallbackCategoryOne, String categoryName) {
+        Call<MealModelList> call = apiCalls.getAllMealsByCategory(categoryName);
+        call.enqueue(new Callback<MealModelList>() {
+            @Override
+            public void onResponse(Call<MealModelList> call, Response<MealModelList> response) {
+                if (response.isSuccessful()) {
+                    Log.i(TAG, "onResponse: random" + response.body().getMeals().get(0).getStrMeal());
+                    networkCallbackCategoryOne.onCategoryNameSuccessfulResult(response.body().getMeals());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MealModelList> call, Throwable t) {
+
+                Log.i(TAG, "onFailure: random");
+                networkCallbackCategoryOne.onFailureCategoryNameResult(t.getMessage());
+                t.printStackTrace();
+            }
+        });
+    }
+
+    @Override
+    public void enqueueCallMealsByArea(NetworkCallbackAreaOne networkCallbackAreaOne, String areaName) {
+
+        Call<MealModelList> call = apiCalls.getAllMealsByArea(areaName);
+        call.enqueue(new Callback<MealModelList>() {
+            @Override
+            public void onResponse(Call<MealModelList> call, Response<MealModelList> response) {
+                if (response.isSuccessful()) {
+                    Log.i(TAG, "onResponse: random" + response.body().getMeals().get(0).getStrMeal());
+                    networkCallbackAreaOne.onAreaNameSuccessfulResult(response.body().getMeals());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MealModelList> call, Throwable t) {
+
+                Log.i(TAG, "onFailure: random");
+                networkCallbackAreaOne.onFailureAreaNameResult(t.getMessage());
+                t.printStackTrace();
+            }
+        });
+    }
+
 
 }

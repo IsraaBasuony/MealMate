@@ -18,7 +18,11 @@
         android:id="@+id/searchFragment2"
         android:name="com.iti.mealmate.search.view.SearchFragment"
         android:label="search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment2_to_allMealsFragment"
+            app:destination="@id/allMealsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favouriteFragment"
         android:name="com.iti.mealmate.FavouriteFragment"
@@ -34,5 +38,29 @@
             app:argType="string"
             app:nullable="true"
             android:defaultValue="null" />
+    </fragment>
+    <fragment
+        android:id="@+id/allMealsFragment"
+        android:name="com.iti.mealmate.allMeals.view.AllMealsFragment"
+        android:label="fragment_all_meals"
+        tools:layout="@layout/fragment_all_meals" >
+        <argument
+            android:name="categoryName"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument android:name="countryName"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="non" />
+        <argument
+            android:name="ingrediantName"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="non" />
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 </navigation>

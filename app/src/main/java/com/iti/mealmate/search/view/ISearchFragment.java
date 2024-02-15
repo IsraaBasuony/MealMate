@@ -8,10 +8,12 @@ import java.util.List;
 
 public interface ISearchFragment {
 
-    public void showAllCategories(List<Category> categoryList);
-    public void showAllIngredients(List<Ingredient> ingredientList);
+    void showAllCategories(List<Category> categoryList);
+
+    void showAllIngredients(List<Ingredient> ingredientList);
+
     void showAllCountries(List<Country> countryList);
 
-    public void showErrMsg(String errorMsg);
+    void showErrMsg(String errorMsg);
 
 }

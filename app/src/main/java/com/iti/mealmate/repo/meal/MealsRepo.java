@@ -2,9 +2,12 @@ package com.iti.mealmate.repo.meal;
 
 
 import com.iti.mealmate.network.NetworkCallbackAllMeals;
+import com.iti.mealmate.network.NetworkCallbackAreaOne;
 import com.iti.mealmate.network.NetworkCallbackCagtegory;
+import com.iti.mealmate.network.NetworkCallbackCategoryOne;
 import com.iti.mealmate.network.NetworkCallbackCountry;
 import com.iti.mealmate.network.NetworkCallbackIngredient;
+import com.iti.mealmate.network.NetworkCallbackIngredientOne;
 import com.iti.mealmate.network.NetworkCallbackMealDetails;
 import com.iti.mealmate.network.NetworkCallbackRandom;
 import com.iti.mealmate.network.RemoteDataSource;
@@ -19,7 +22,6 @@ public class MealsRepo implements IMealsRepo {
         }
         return repo;
     }
-
     private  MealsRepo(RemoteDataSource remoteDataSource){
         this.remoteDataSource = remoteDataSource;
     }
@@ -56,6 +58,21 @@ public class MealsRepo implements IMealsRepo {
     public void getMealByID(NetworkCallbackMealDetails networkCallbackMealDetails, String mealID) {
         remoteDataSource.enqueueCallFullDetails(networkCallbackMealDetails,mealID);
 
+    }
+    @Override
+    public void getMealsByIngrediantName(NetworkCallbackIngredientOne networkCallbackIngredientOne, String ingrediantName) {
+        remoteDataSource.enqueueCallMealsByIngredient(networkCallbackIngredientOne, ingrediantName);
+    }
+
+    @Override
+    public void getMealsByAreaName(NetworkCallbackAreaOne networkCallbackAreaOne, String areaName) {
+        remoteDataSource.enqueueCallMealsByArea(networkCallbackAreaOne, areaName);
+    }
+
+    @Override
+    public void getMealsBycategory(NetworkCallbackCategoryOne networkCallbackCategoryOne, String categoryName) {
+
+        remoteDataSource.enqueueCallMealsByCategory(networkCallbackCategoryOne, categoryName);
     }
 
 

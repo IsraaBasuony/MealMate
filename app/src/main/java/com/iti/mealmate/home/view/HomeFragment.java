@@ -71,6 +71,9 @@ public class HomeFragment extends Fragment implements IViewHome {
             @Override
             public void onClick(View view) {
 
+                HomeFragmentDirections.ActionHomeFragment2ToFullDetailsFragment2 action = HomeFragmentDirections.actionHomeFragment2ToFullDetailsFragment2();
+                action.setMealID(mealModel.getIdMeal());
+                Navigation.findNavController(view).navigate(action);
 
             }
         });

@@ -9,10 +9,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.iti.mealmate.R;
+import com.iti.mealmate.home.view.HomeFragmentDirections;
 import com.iti.mealmate.model.Category;
 
 import java.util.ArrayList;
@@ -48,7 +50,11 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.searchByCategoryName(category.getStrCategory());
+
+                SearchFragmentDirections.ActionSearchFragment2ToAllMealsFragment action = SearchFragmentDirections.actionSearchFragment2ToAllMealsFragment();
+                action.setCategoryName(categoryList.get(position).getStrCategory());
+                action.setId(1);
+                Navigation.findNavController(v).navigate(action);
             }
         });
         Glide.with(holder.itemView.getContext()).load(categoryList.get(position).getStrCategoryThumb())

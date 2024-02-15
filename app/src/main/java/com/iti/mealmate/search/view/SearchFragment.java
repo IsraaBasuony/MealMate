@@ -83,7 +83,6 @@ public class SearchFragment extends Fragment implements ISearchFragment {
             });
         }
     }
-
     @Override
     public void showAllCategories(List<Category> categoryList) {
 
@@ -99,7 +98,6 @@ public class SearchFragment extends Fragment implements ISearchFragment {
 
     @Override
     public void showAllCountries(List<Country> countryList) {
-
         countriesAdapter.setList((ArrayList<Country>) countryList);
     }
 

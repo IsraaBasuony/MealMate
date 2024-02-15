@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.iti.mealmate.R;
@@ -44,6 +45,15 @@ public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.MyVi
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Country country = countryList.get(position);
         holder.countryName.setText(countryList.get(position).getStrArea());
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SearchFragmentDirections.ActionSearchFragment2ToAllMealsFragment action = SearchFragmentDirections.actionSearchFragment2ToAllMealsFragment();
+                action.setCategoryName(countryList.get(position).getStrArea());
+                action.setId(3);
+                Navigation.findNavController(view).navigate(action);
+            }
+        });
     }
 
     @Override
