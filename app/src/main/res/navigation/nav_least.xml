@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/favouriteFragment"
-        android:name="com.iti.mealmate.FavouriteFragment"
+        android:name="com.iti.mealmate.favourite.view.FavouriteFragment"
         android:label="favourite"
         tools:layout="@layout/fragment_favourite" />
     <fragment

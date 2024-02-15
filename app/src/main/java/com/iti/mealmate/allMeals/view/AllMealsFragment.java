@@ -17,6 +17,7 @@ import com.iti.mealmate.R;
 import com.iti.mealmate.allMeals.presenter.AllMealsPresenter;
 import com.iti.mealmate.allMeals.presenter.IPresenterAllMeals;
 import com.iti.mealmate.databinding.FragmentAllMealsBinding;
+import com.iti.mealmate.db.LocalFavMealsDataSource;
 import com.iti.mealmate.fullDetail.view.FullDetailsFragmentArgs;
 import com.iti.mealmate.model.MealModel;
 import com.iti.mealmate.network.RemoteDataSource;
@@ -50,7 +51,7 @@ public class AllMealsFragment extends Fragment implements IAllMeals {
 
         layoutManager = new GridLayoutManager(getContext(), 2);
         adapter = new AllMealsFromSearchAdapter(getContext(),new ArrayList<>());
-        presenter = new AllMealsPresenter(this, MealsRepo.getInstance(RemoteDataSource.getInstance()));
+        presenter = new AllMealsPresenter(this, MealsRepo.getInstance(RemoteDataSource.getInstance(), LocalFavMealsDataSource.getInstance(getContext())));
         binding.resAllMeals.setLayoutManager(layoutManager);
 
         String categoryName = AllMealsFragmentArgs.fromBundle(getArguments()).getCategoryName();

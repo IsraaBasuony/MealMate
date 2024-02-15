@@ -17,7 +17,6 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMain2Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         navController = Navigation.findNavController(this, R.id.nav_host_fragment2);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);

@@ -1,66 +1,174 @@
 package com.iti.mealmate.model;
 
+import android.graphics.Bitmap;
+
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import java.util.ArrayList;
 
-public class Meal {
-    public String idMeal;
-    public String strMeal;
-    public Object strDrinkAlternate;
-    public String strCategory;
-    public String strArea;
-    public String strInstructions;
-    public String strMealThumb;
-    public String strTags;
-    public String strYoutube;
-    public String strIngredient1;
-    public String strIngredient2;
-    public String strIngredient3;
-    public String strIngredient4;
-    public String strIngredient5;
-    public String strIngredient6;
-    public String strIngredient7;
-    public String strIngredient8;
-    public String strIngredient9;
-    public String strIngredient10;
-    public String strIngredient11;
-    public String strIngredient12;
-    public String strIngredient13;
-    public String strIngredient14;
-    public String strIngredient15;
-    public String strIngredient16;
-    public String strIngredient17;
-    public String strIngredient18;
-    public String strIngredient19;
-    public String strIngredient20;
-    public String strMeasure1;
-    public String strMeasure2;
-    public String strMeasure3;
-    public String strMeasure4;
-    public String strMeasure5;
-    public String strMeasure6;
-    public String strMeasure7;
-    public String strMeasure8;
-    public String strMeasure9;
-    public String strMeasure10;
-    public String strMeasure11;
-    public String strMeasure12;
-    public String strMeasure13;
-    public String strMeasure14;
-    public String strMeasure15;
-    public String strMeasure16;
-    public String strMeasure17;
-    public String strMeasure18;
-    public String strMeasure19;
-    public String strMeasure20;
-    public String strSource;
-    public Object strImageSource;
-    public Object strCreativeCommonsConfirmed;
-    public Object dateModified;
 
+@Entity(tableName = "FavMeals")
+public class Meal {
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name =  "id")
+    public String idMeal;
+    @ColumnInfo(name = "image")
+    public Bitmap image;
+    @ColumnInfo(name = "name")
+    public String strMeal;
+    @Ignore
+    public Object strDrinkAlternate;
+    @ColumnInfo(name = "Category")
+
+    public String strCategory;
+    @ColumnInfo(name =  "Area")
+    public String strArea;
+    @ColumnInfo(name ="Instructions")
+    public String strInstructions;
+    @ColumnInfo(name ="thumb")
+    public String strMealThumb;
+    @Ignore
+    public String strTags;
+    @ColumnInfo(name ="youtube")
+
+    public String strYoutube;
+    @ColumnInfo(name ="ingradiant1")
+
+    public String strIngredient1;
+    @ColumnInfo(name ="ingradiant2")
+
+    public String strIngredient2;
+    @ColumnInfo(name ="ingradiant3")
+
+    public String strIngredient3;
+    @ColumnInfo(name ="ingradiant4")
+
+    public String strIngredient4;
+    @ColumnInfo(name ="ingradiant5")
+
+    public String strIngredient5;
+    @ColumnInfo(name ="ingradiant6")
+
+    public String strIngredient6;
+    @ColumnInfo(name ="ingradiant7")
+
+    public String strIngredient7;
+    @ColumnInfo(name ="ingradiant8")
+
+    public String strIngredient8;
+    @ColumnInfo(name ="ingradiant9")
+
+    public String strIngredient9;
+    @ColumnInfo(name ="ingradiant10")
+
+    public String strIngredient10;
+    @ColumnInfo(name ="ingradiant11")
+
+    public String strIngredient11;
+    @ColumnInfo(name ="ingradiant12")
+
+    public String strIngredient12;
+    @ColumnInfo(name ="ingradiant13")
+
+    public String strIngredient13;
+    @ColumnInfo(name ="ingradiant14")
+
+    public String strIngredient14;
+    @ColumnInfo(name ="ingradiant15")
+
+    public String strIngredient15;
+    @ColumnInfo(name ="ingradiant16")
+
+    public String strIngredient16;
+    @ColumnInfo(name ="ingradiant17")
+
+    public String strIngredient17;
+    @ColumnInfo(name ="ingradiant18")
+
+    public String strIngredient18;
+    @ColumnInfo(name ="ingradiant19")
+
+    public String strIngredient19;
+    @ColumnInfo(name ="ingradiant20")
+
+    public String strIngredient20;
+    @ColumnInfo(name ="Measure1")
+
+    public String strMeasure1;
+    @ColumnInfo(name ="Measure2")
+
+    public String strMeasure2;
+    @ColumnInfo(name ="Measure3")
+
+    public String strMeasure3;
+    @ColumnInfo(name ="Measure4")
+
+    public String strMeasure4;
+    @ColumnInfo(name ="Measure5")
+
+    public String strMeasure5;
+    @ColumnInfo(name ="Measure6")
+
+    public String strMeasure6;
+    @ColumnInfo(name ="Measure7")
+
+    public String strMeasure7;
+    @ColumnInfo(name ="Measure8")
+
+    public String strMeasure8;
+    @ColumnInfo(name ="Measure9")
+
+    public String strMeasure9;
+    @ColumnInfo(name ="Measure10")
+
+    public String strMeasure10;
+    @ColumnInfo(name ="Measure11")
+
+    public String strMeasure11;
+    @ColumnInfo(name ="Measure12")
+
+    public String strMeasure12;
+    @ColumnInfo(name ="Measure13")
+
+    public String strMeasure13;
+    @ColumnInfo(name ="Measure14")
+
+    public String strMeasure14;
+    @ColumnInfo(name ="Measure15")
+
+    public String strMeasure15;
+    @ColumnInfo(name ="Measure16")
+
+    public String strMeasure16;
+    @ColumnInfo(name ="Measure17")
+
+    public String strMeasure17;
+    @ColumnInfo(name ="Measure18")
+
+    public String strMeasure18;
+    @ColumnInfo(name ="Measure19")
+
+    public String strMeasure19;
+    @ColumnInfo(name ="Measure20")
+
+    public String strMeasure20;
+    @ColumnInfo(name ="Source")
+
+    public String strSource;
+    @Ignore
+    public Object strImageSource;
+    @Ignore
+    public Object strCreativeCommonsConfirmed;
+    @Ignore
+    public Object dateModified;
     public String getIdMeal() {
         return idMeal;
     }
-
     public void setIdMeal(String idMeal) {
         this.idMeal = idMeal;
     }
@@ -80,7 +188,6 @@ public class Meal {
     public void setStrDrinkAlternate(Object strDrinkAlternate) {
         this.strDrinkAlternate = strDrinkAlternate;
     }
-
     public String getStrCategory() {
         return strCategory;
     }
@@ -472,13 +579,19 @@ public class Meal {
     public void setStrCreativeCommonsConfirmed(Object strCreativeCommonsConfirmed) {
         this.strCreativeCommonsConfirmed = strCreativeCommonsConfirmed;
     }
-
     public Object getDateModified() {
         return dateModified;
     }
-
     public void setDateModified(Object dateModified) {
         this.dateModified = dateModified;
+    }
+
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
     }
     public  ArrayList<IngredientMeasures> combineIngredientsAndMeasures(Meal meal) {
         ArrayList<IngredientMeasures> ingredientMeasures = new ArrayList<>();

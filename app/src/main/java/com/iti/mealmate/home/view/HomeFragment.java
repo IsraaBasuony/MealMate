@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.iti.mealmate.R;
 import com.iti.mealmate.databinding.FragmentHomeBinding;
+import com.iti.mealmate.db.LocalFavMealsDataSource;
 import com.iti.mealmate.home.presenter.HomePresenter;
 import com.iti.mealmate.model.MealModel;
 import com.iti.mealmate.network.RemoteDataSource;
@@ -57,7 +58,7 @@ public class HomeFragment extends Fragment implements IViewHome {
        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
        binding.lazyMealsRec.setLayoutManager(layoutManager);
        binding.lazyMealsRec.setAdapter(adapter);
-        homePresenter = new HomePresenter(this, MealsRepo.getInstance(RemoteDataSource.getInstance()));
+        homePresenter = new HomePresenter(this, MealsRepo.getInstance(RemoteDataSource.getInstance(), LocalFavMealsDataSource.getInstance(getContext())));
         homePresenter.getRandomMeal();
         homePresenter.getAllMeals();
     }

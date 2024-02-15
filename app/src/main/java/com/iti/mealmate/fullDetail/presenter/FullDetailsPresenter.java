@@ -18,11 +18,15 @@ public class FullDetailsPresenter implements IFullDetailsPresenter, NetworkCallb
         this._view = _view;
         this._repo = _repo;
     }
-
     @Override
     public void getFullDetailedMeal(String mealID) {
         _repo.getMealByID(this, mealID);
 
+    }
+
+    @Override
+    public void addToFav(Meal meal) {
+        _repo.insert(meal);
     }
 
 

@@ -1,6 +1,9 @@
 package com.iti.mealmate.repo.meal;
 
 
+import com.iti.mealmate.db.LocalFavMealsDataSource;
+import com.iti.mealmate.model.Meal;
+import com.iti.mealmate.model.MealModel;
 import com.iti.mealmate.network.NetworkCallbackAllMeals;
 import com.iti.mealmate.network.NetworkCallbackAreaOne;
 import com.iti.mealmate.network.NetworkCallbackCagtegory;
@@ -12,19 +15,26 @@ import com.iti.mealmate.network.NetworkCallbackMealDetails;
 import com.iti.mealmate.network.NetworkCallbackRandom;
 import com.iti.mealmate.network.RemoteDataSource;
 
+import java.util.List;
+
+import io.reactivex.rxjava3.core.Flowable;
+
 public class MealsRepo implements IMealsRepo {
     RemoteDataSource remoteDataSource;
+    LocalFavMealsDataSource localDataSource;
 
     private  static MealsRepo repo = null;
-    public  static  MealsRepo getInstance(RemoteDataSource remoteDataSource){
+    public  static  MealsRepo getInstance(RemoteDataSource remoteDataSource, LocalFavMealsDataSource localDataSource){
         if(repo == null){
-            repo = new MealsRepo(remoteDataSource);
+            repo = new MealsRepo(remoteDataSource, localDataSource);
         }
         return repo;
     }
-    private  MealsRepo(RemoteDataSource remoteDataSource){
+    private  MealsRepo(RemoteDataSource remoteDataSource, LocalFavMealsDataSource localFavMealsDataSource){
         this.remoteDataSource = remoteDataSource;
+        this.localDataSource = localFavMealsDataSource;
     }
+
 
     @Override
     public void getRandom(NetworkCallbackRandom networkCallbackRandom) {
@@ -73,6 +83,20 @@ public class MealsRepo implements IMealsRepo {
     public void getMealsBycategory(NetworkCallbackCategoryOne networkCallbackCategoryOne, String categoryName) {
 
         remoteDataSource.enqueueCallMealsByCategory(networkCallbackCategoryOne, categoryName);
+    }
+
+    @Override
+    public Flowable<List<Meal>> getStoredFavMeals() {
+        return  localDataSource.getStrodeFavMeals();
+    }
+
+    @Override
+    public void delete(Meal meal) {
+        localDataSource.delete(meal);
+    }
+    @Override
+    public void insert(Meal meal) {
+        localDataSource.insert(meal);
     }
 
 

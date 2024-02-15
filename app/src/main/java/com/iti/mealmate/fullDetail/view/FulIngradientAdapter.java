@@ -42,6 +42,7 @@ public class FulIngradientAdapter extends RecyclerView.Adapter<FulIngradientAdap
                         .override(80, 80))
                 .placeholder(R.drawable.ic_launcher_foreground).error(R.drawable.ic_launcher_background).into(holder.ingredientThumb);
 
+
     }
 
     @Override

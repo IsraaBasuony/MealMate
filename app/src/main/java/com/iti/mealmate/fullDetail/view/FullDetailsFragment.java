@@ -1,5 +1,7 @@
 package com.iti.mealmate.fullDetail.view;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +20,11 @@ import android.webkit.WebChromeClient;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.iti.mealmate.R;
 import com.iti.mealmate.databinding.FragmentFullDetailsBinding;
+import com.iti.mealmate.db.LocalFavMealsDataSource;
 import com.iti.mealmate.fullDetail.presenter.FullDetailsPresenter;
 import com.iti.mealmate.model.Meal;
 import com.iti.mealmate.network.RemoteDataSource;
@@ -61,7 +67,7 @@ public class FullDetailsFragment extends Fragment implements IFullDetails {
         binding.ingrediantRec.setLayoutManager(layoutManager);
         binding.ingrediantRec.setAdapter(adapter);
         String id = FullDetailsFragmentArgs.fromBundle(getArguments()).getMealID();
-        presenter = new FullDetailsPresenter(this, MealsRepo.getInstance(RemoteDataSource.getInstance()));
+        presenter = new FullDetailsPresenter(this, MealsRepo.getInstance(RemoteDataSource.getInstance(), LocalFavMealsDataSource.getInstance(getContext())));
         presenter.getFullDetailedMeal(id);
     }
 
@@ -69,12 +75,37 @@ public class FullDetailsFragment extends Fragment implements IFullDetails {
     public void onFullDetailedMealSuccess(Meal meal) {
         binding.mealName.setText(meal.getStrMeal());
         binding.instructionsTxt.setText(meal.getStrInstructions());
-        Glide.with(requireContext())
+        Glide.with(getContext())
                 .load(meal.getStrMealThumb())
                 .apply(new RequestOptions())
                 .error(R.drawable.ic_launcher_background)
                 .into(binding.mealImg);
+
+        Glide.with(getContext())
+                .asBitmap()
+                .load(meal.getStrMealThumb())
+                .apply(new RequestOptions().override(200, 200))
+                .into(new CustomTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        Log.i("TAG", "onResourceReady: ");
+                        meal.setImage(resource);
+                        binding.mealImg.setImageBitmap(resource);
+                    }
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+                    }
+                });
+
+
         binding.areaName.setText(meal.getStrArea());
+        binding.btntnFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.addToFav(meal);
+                Log.i("TAG", "onClick: "+ meal.getImage().getByteCount());
+            }
+        });
         adapter.setList(meal.combineIngredientsAndMeasures(meal));
         String videoId = extractVideoId(meal.getStrYoutube());
         String embeddedVideoUrl = "https://www.youtube.com/embed/" + videoId;
