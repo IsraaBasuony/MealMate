@@ -1,9 +1,11 @@
 package com.iti.mealmate.repo.meal;
 
 
-import com.iti.mealmate.db.LocalFavMealsDataSource;
+import com.iti.mealmate.db.favouriteMeal.DBDelegate;
+import com.iti.mealmate.db.favouriteMeal.LocalFavMealsDataSource;
+import com.iti.mealmate.db.plannedMeal.LocalPlannedMealsDataSource;
 import com.iti.mealmate.model.Meal;
-import com.iti.mealmate.model.MealModel;
+import com.iti.mealmate.model.PlannedMeal;
 import com.iti.mealmate.network.NetworkCallbackAllMeals;
 import com.iti.mealmate.network.NetworkCallbackAreaOne;
 import com.iti.mealmate.network.NetworkCallbackCagtegory;
@@ -22,6 +24,7 @@ import io.reactivex.rxjava3.core.Flowable;
 public class MealsRepo implements IMealsRepo {
     RemoteDataSource remoteDataSource;
     LocalFavMealsDataSource localDataSource;
+    LocalPlannedMealsDataSource localPlannedMealsDataSource;
 
     private  static MealsRepo repo = null;
     public  static  MealsRepo getInstance(RemoteDataSource remoteDataSource, LocalFavMealsDataSource localDataSource){
@@ -33,6 +36,11 @@ public class MealsRepo implements IMealsRepo {
     private  MealsRepo(RemoteDataSource remoteDataSource, LocalFavMealsDataSource localFavMealsDataSource){
         this.remoteDataSource = remoteDataSource;
         this.localDataSource = localFavMealsDataSource;
+    }
+
+    private  MealsRepo(RemoteDataSource remoteDataSource, LocalPlannedMealsDataSource localPlannedMealsDataSource){
+        this.remoteDataSource = remoteDataSource;
+        this.localPlannedMealsDataSource = localPlannedMealsDataSource;
     }
 
 
@@ -98,6 +106,12 @@ public class MealsRepo implements IMealsRepo {
     public void insert(Meal meal) {
         localDataSource.insert(meal);
     }
+
+    @Override
+    public void getLocalMeal(String mealId, DBDelegate dbDelegate) {
+        localDataSource.getLocalMeal(mealId , dbDelegate);
+    }
+
 
 
 }

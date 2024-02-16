@@ -1,4 +1,5 @@
 package com.iti.mealmate.search.view;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,7 +17,7 @@ import android.view.ViewGroup;
 
 import com.google.android.material.chip.Chip;
 import com.iti.mealmate.databinding.FragmentSearchBinding;
-import com.iti.mealmate.db.LocalFavMealsDataSource;
+import com.iti.mealmate.db.favouriteMeal.LocalFavMealsDataSource;
 import com.iti.mealmate.model.Category;
 import com.iti.mealmate.model.Country;
 import com.iti.mealmate.model.Ingredient;
@@ -34,7 +35,6 @@ import io.reactivex.rxjava3.core.ObservableEmitter;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class SearchFragment extends Fragment implements ISearchFragment {
-
     FragmentSearchBinding binding;
     SearchPresenter searchPresenter;
     GridLayoutManager layoutManager;
@@ -44,6 +44,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
     ArrayList<Category> categoryList = new ArrayList<>();
     ArrayList<Country> countryList = new ArrayList<>();
     ArrayList<Ingredient> ingredientList = new ArrayList<>();
+    private String type;
 
 
     @Override
@@ -67,9 +68,24 @@ public class SearchFragment extends Fragment implements ISearchFragment {
         layoutManager = new GridLayoutManager(getContext(), 2);
         binding.searchRecDefault.setLayoutManager(layoutManager);
         searchPresenter = new SearchPresenter(this, MealsRepo.getInstance(RemoteDataSource.getInstance(), LocalFavMealsDataSource.getInstance(getContext())));
-        searchPresenter.getAllCountries();
-        searchPresenter.getAllIngredients();
-        searchPresenter.getCategories();
+
+        if (getArguments() != null) {
+            type = getArguments().getString("type");
+            switch (type) {
+                case "Category":
+                    searchPresenter.getCategories();
+                    break;
+                case "Country":
+                    searchPresenter.getAllCountries();
+                    break;
+                case "Ingredient":
+                    searchPresenter.getAllIngredients();
+                    break;
+            }
+        } else {
+
+            searchPresenter.getCategories();
+        }
         setRecyclerV();
 
 
@@ -136,36 +152,61 @@ public class SearchFragment extends Fragment implements ISearchFragment {
             chip.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (chipTxt.equals("Country")) {
-                        binding.searchRecDefault.setAdapter(countriesAdapter);
-                    } else if (chipTxt.equals("Ingredient")) {
-                        binding.searchRecDefault.setAdapter(ingredientAdapter);
-                    } else if (chipTxt.equals("Category")) {
-                        binding.searchRecDefault.setAdapter(categoriesAdapter);
+                    switch (chipTxt) {
+                        case "Country":
+                            binding.searchBoxLayout.setHint("Search by Country");
+                            searchPresenter.getAllCountries();
+                            binding.searchRecDefault.setAdapter(countriesAdapter);
+                            break;
+                        case "Ingredient":
+                            binding.searchBoxLayout.setHint("Search by Ingredient");
+                            searchPresenter.getAllIngredients();
+                            binding.searchRecDefault.setAdapter(ingredientAdapter);
+                            break;
+                        case "Category":
+                            binding.searchBoxLayout.setHint("Search by Category");
+                            searchPresenter.getCategories();
+                            binding.searchRecDefault.setAdapter(categoriesAdapter);
+                            break;
                     }
+
                 }
             });
         }
+    }
+
+    public void setType(String type) {
+        this.type = type;
+        if (getArguments() == null) {
+            setArguments(new Bundle());
+        }
+        getArguments().putString("type", type);
     }
 
 
     @Override
     public void showAllCategories(List<Category> categoryList) {
         this.categoryList = (ArrayList<Category>) categoryList;
+        setType("Category");
         categoriesAdapter.setList((ArrayList<Category>) categoryList);
+        binding.searchRecDefault.setAdapter(categoriesAdapter);
     }
 
     @Override
     public void showAllIngredients(List<Ingredient> ingredientList) {
         this.ingredientList = (ArrayList<Ingredient>) ingredientList;
+        setType("Ingredient");
         ingredientAdapter.setList((ArrayList<Ingredient>) ingredientList);
+        binding.searchRecDefault.setAdapter(ingredientAdapter);
         Log.i("Israa", "showAllIngredients: " + ingredientList.get(1).getStrIngredient());
     }
 
     @Override
     public void showAllCountries(List<Country> countryList) {
         this.countryList = (ArrayList<Country>) countryList;
+        setType("Country");
         countriesAdapter.setList((ArrayList<Country>) countryList);
+        binding.searchRecDefault.setAdapter(countriesAdapter);
     }
 
     @Override

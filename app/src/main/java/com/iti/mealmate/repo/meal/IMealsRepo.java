@@ -1,7 +1,8 @@
 package com.iti.mealmate.repo.meal;
 
+import com.iti.mealmate.db.favouriteMeal.DBDelegate;
 import com.iti.mealmate.model.Meal;
-import com.iti.mealmate.model.MealModel;
+import com.iti.mealmate.model.PlannedMeal;
 import com.iti.mealmate.network.NetworkCallbackAllMeals;
 import com.iti.mealmate.network.NetworkCallbackAreaOne;
 import com.iti.mealmate.network.NetworkCallbackCagtegory;
@@ -34,5 +35,7 @@ public interface IMealsRepo {
 
     void delete(Meal meal);
     void insert(Meal meal);
+    void getLocalMeal(String mealId, DBDelegate dbDelegate);
+
 
 }

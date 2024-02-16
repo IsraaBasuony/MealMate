@@ -6,23 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".search.view.SearchFragment">
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/search_box_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/search_box"
-        android:background="@drawable/custom_edittext"
-        android:layout_margin="16dp"
-        android:padding="8dp"
-        android:hint="search"
-        android:drawableLeft="@drawable/search"
-        android:drawablePadding="8dp"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        style="@style/poppinsRegular"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:hint="Search"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/primary"
+        app:endIconMode="clear_text"
+        app:cursorColor="@color/primary"
+        app:hintTextColor="@color/black"
+        app:endIconTint="@color/primary"
+        app:startIconTint="@color/primary"
+        app:startIconDrawable="@drawable/search"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/search_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textAutoComplete"
+            android:textSize="@dimen/_14sdp"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroup"
         android:layout_width="wrap_content"
@@ -32,7 +45,7 @@
         app:chipSpacing="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_box">
+        app:layout_constraintTop_toBottomOf="@id/search_box_layout">
         <com.google.android.material.chip.Chip
             android:id="@+id/chipCountry"
             android:layout_width="wrap_content"

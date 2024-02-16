@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.iti.mealmate.R;
 import com.iti.mealmate.model.Country;
+import com.iti.mealmate.model.FlagSource;
 
 import java.util.ArrayList;
 
@@ -22,6 +23,7 @@ public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.MyVi
     private Context context;
     private ArrayList<Country> countryList;
     private OnCountryClickListener listener;
+    private FlagSource flagSource = new FlagSource();
     public CountriesAdapter(Context _context, ArrayList<Country> _countryList) {
         this.context = _context;
         this.countryList = _countryList;
@@ -45,6 +47,7 @@ public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.MyVi
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Country country = countryList.get(position);
         holder.countryName.setText(countryList.get(position).getStrArea());
+        holder.countryThumb.setImageResource(flagSource.getFlagIdByName(country.getStrArea()));
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,7 +79,7 @@ public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.MyVi
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             countryName = itemView.findViewById(R.id.country_txt);
-            countryThumb = itemView.findViewById(R.id.category_img);
+            countryThumb = itemView.findViewById(R.id.flag_img);
             cardView = itemView.findViewById(R.id.country_card);
 
         }

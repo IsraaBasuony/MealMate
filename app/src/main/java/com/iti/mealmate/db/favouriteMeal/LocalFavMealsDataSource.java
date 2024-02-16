@@ -1,11 +1,17 @@
-package com.iti.mealmate.db;
+package com.iti.mealmate.db.favouriteMeal;
 
 import android.content.Context;
+
+import com.iti.mealmate.db.MyDataBase;
 import com.iti.mealmate.model.Meal;
 import java.util.List;
-import io.reactivex.rxjava3.core.Flowable;
 
-public class LocalFavMealsDataSource implements  ILocalFavMealsDataSource {
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
+public class LocalFavMealsDataSource implements ILocalFavMealsDataSource {
     private  static LocalFavMealsDataSource repo = null;
     private Context context;
     private MealDAO mealDAO;
@@ -43,5 +49,13 @@ public class LocalFavMealsDataSource implements  ILocalFavMealsDataSource {
                 mealDAO.insertFavMeal(meal);
             }
         }).start();
+    }
+
+    @Override
+    public void getLocalMeal(String mealID, DBDelegate dbDelegate) {
+        Single<Meal> observable = mealDAO.getMealByID(mealID);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(o -> dbDelegate.onSuccessLocalMeal((Meal) o));
     }
 }

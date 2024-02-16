@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.iti.mealmate.R;
+import com.iti.mealmate.allMeals.view.AllMealsFragmentDirections;
 import com.iti.mealmate.home.view.HomeFragmentDirections;
 import com.iti.mealmate.model.Meal;
 
@@ -25,7 +26,6 @@ public class AllFavMealsAdapter extends RecyclerView.Adapter<AllFavMealsAdapter.
     private Context context;
     private ArrayList<Meal> mealModelArrayList;
     private OnDeleteClickListener listener;
-
 
 
     public AllFavMealsAdapter(Context _context, OnDeleteClickListener _listener, ArrayList<Meal> _mealArrayList) {
@@ -49,6 +49,16 @@ public class AllFavMealsAdapter extends RecyclerView.Adapter<AllFavMealsAdapter.
             @Override
             public void onClick(View view) {
                 listener.onDelClick(meal);
+            }
+        });
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FavouriteFragmentDirections.ActionFavouriteFragmentToFullDetailsFragment action = FavouriteFragmentDirections.actionFavouriteFragmentToFullDetailsFragment();
+                action.setMealID(meal.getIdMeal());
+                action.setId(1);
+                Navigation.findNavController(view).navigate(action);
+
             }
         });
 

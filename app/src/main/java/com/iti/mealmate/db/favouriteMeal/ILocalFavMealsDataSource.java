@@ -1,4 +1,4 @@
-package com.iti.mealmate.db;
+package com.iti.mealmate.db.favouriteMeal;
 import com.iti.mealmate.model.Meal;
 
 import java.util.List;
@@ -10,4 +10,6 @@ public interface ILocalFavMealsDataSource {
     void delete(Meal meal);
 
     void insert(Meal meal);
+
+    void getLocalMeal(String mealID, DBDelegate dbDelegate);
 }

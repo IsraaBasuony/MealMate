@@ -1,4 +1,4 @@
-package com.iti.mealmate.db;
+package com.iti.mealmate.db.favouriteMeal;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

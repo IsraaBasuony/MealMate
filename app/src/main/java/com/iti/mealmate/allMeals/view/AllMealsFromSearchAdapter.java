@@ -53,7 +53,7 @@ public class AllMealsFromSearchAdapter extends RecyclerView.Adapter<AllMealsFrom
             @Override
             public void onClick(View v) {
                 //listener.searchByMealId(mealModelArrayList.get(position).getStrMeal());
-                HomeFragmentDirections.ActionHomeFragment2ToFullDetailsFragment2 action = HomeFragmentDirections.actionHomeFragment2ToFullDetailsFragment2();
+                AllMealsFragmentDirections.ActionAllMealsFragmentToFullDetailsFragment action = AllMealsFragmentDirections.actionAllMealsFragmentToFullDetailsFragment();
                 action.setMealID(mealModelArrayList.get(position).getIdMeal());
                 Navigation.findNavController(v).navigate(action);
             }

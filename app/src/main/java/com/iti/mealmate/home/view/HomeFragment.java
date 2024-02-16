@@ -13,13 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.iti.mealmate.R;
 import com.iti.mealmate.databinding.FragmentHomeBinding;
-import com.iti.mealmate.db.LocalFavMealsDataSource;
+import com.iti.mealmate.db.favouriteMeal.LocalFavMealsDataSource;
 import com.iti.mealmate.home.presenter.HomePresenter;
 import com.iti.mealmate.model.MealModel;
 import com.iti.mealmate.network.RemoteDataSource;
@@ -78,7 +77,7 @@ public class HomeFragment extends Fragment implements IViewHome {
 
             }
         });
-        Glide.with(requireContext())
+        Glide.with(getContext())
                 .load(mealModel.getStrMealThumb())
                 .apply(new RequestOptions())
                 .error(R.drawable.ic_launcher_background)

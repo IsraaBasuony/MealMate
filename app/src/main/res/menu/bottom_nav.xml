@@ -16,7 +16,7 @@
 
 
     <item
-        android:id="@+id/calenderbtn"
+        android:id="@+id/calenderFragment"
         android:title="@string/calender"
         android:icon="@drawable/calendar"/>
 

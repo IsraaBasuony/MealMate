@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.iti.mealmate.databinding.FragmentFavouriteBinding;
-import com.iti.mealmate.db.LocalFavMealsDataSource;
+import com.iti.mealmate.db.favouriteMeal.LocalFavMealsDataSource;
 import com.iti.mealmate.favourite.presenter.FavouritePresenter;
 import com.iti.mealmate.model.Meal;
 import com.iti.mealmate.network.RemoteDataSource;
