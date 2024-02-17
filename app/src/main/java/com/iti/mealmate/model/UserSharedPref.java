@@ -12,54 +12,51 @@ public class UserSharedPref {
     private static final String USER_NAME = "username";
     private static final String USER_EMAIL = "email";
     private static final String USER_PASSWORD = "password";
-
-
-    private UserSharedPref() {
-
-    }
+    private  static SharedPreferences sharedPreferences;
 
     public static void init(Context context) {
         appContext = context;
+        sharedPreferences = appContext.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
     }
 
-    public static SharedPreferences getSharedPreferences() {
-        return appContext.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
-    }
 
     public static void setUserName(String userName) {
-        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(USER_NAME, userName).apply();
     }
 
     public static String getUserName() {
-        return getSharedPreferences().getString(USER_NAME, "");
+        return sharedPreferences.getString(USER_NAME, null);
     }
 
     public static void setUserEmail(String userEmail) {
-        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(USER_EMAIL, userEmail).apply();
     }
 
     public static String getUserEmail() {
-        return getSharedPreferences().getString(USER_EMAIL, "");
+        return sharedPreferences.getString(USER_EMAIL, null);
     }
 
     public static void setUserPassword(String userPassword) {
-        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(USER_PASSWORD, userPassword).apply();
     }
 
     public static String getUserPassword() {
-        return getSharedPreferences().getString(USER_PASSWORD, "");
+        return sharedPreferences.getString(USER_PASSWORD, null);
     }
 
     public static void setUserId(String userEmail) {
-        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(USER_ID, userEmail).apply();
     }
 
     public static String getUserId() {
-        return getSharedPreferences().getString(USER_ID, "");
+        if(sharedPreferences.contains(USER_ID )){
+            return sharedPreferences.getString(USER_ID, null);
+        }
+        return null;
     }
 
 }

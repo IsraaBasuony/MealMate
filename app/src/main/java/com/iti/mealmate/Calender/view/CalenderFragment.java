@@ -5,12 +5,15 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -35,10 +38,12 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class CalenderFragment extends Fragment implements ICalender {
+public class CalenderFragment extends Fragment implements ICalender,OnDeleteClickListener {
 
     FragmentCalenderBinding binding;
     CalenderPresenter presenter;
+    AllPlannedMealsAdapter adapter;
+    LinearLayoutManager layoutManager;
     String date;
     PlannedMeal plannedMeal;
 
@@ -58,6 +63,10 @@ public class CalenderFragment extends Fragment implements ICalender {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        adapter = new AllPlannedMealsAdapter(getContext(),this, new ArrayList<>());
+        layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         presenter = new CalenderPresenter(PlannedMealRepo.getInstance(RemoteDataSource.getInstance(), LocalPlannedMealsDataSource.getInstance(getContext())), this);
         binding.calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -66,35 +75,45 @@ public class CalenderFragment extends Fragment implements ICalender {
                 presenter.getPlannedMeal(date);
             }
         });
-        binding.btnDelPlan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                presenter.deletePlannedMeal(plannedMeal);
-            }
-        });
+        binding.plannedRec.setLayoutManager(layoutManager);
+        binding.plannedRec.setAdapter(adapter);
+
+
     }
 
     @Override
     public void setPlannedMeal(Flowable<List<PlannedMeal>> mealList) {
-        mealList.subscribeOn(Schedulers.io())
+        mealList
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(item ->
-                        {
-                            plannedMeal = item.get(0);
-                            setCard(item.get(0));
-                        },
-                        e -> Log.i("Planned empty", "setPlannedMeal: ")// no data in this date
-                );
-
+                .map(plannedMeals -> filterPlannedMealsByDate(plannedMeals)) // Filter by date
+                .subscribe(
+                        filteredList -> adapter.setList((ArrayList<PlannedMeal>) filteredList),
+                        e -> Toast.makeText(getContext(), "Empty", Toast.LENGTH_SHORT).show());
     }
 
-    private void setCard(PlannedMeal plannedMeal) {
-        Glide.with(getContext())
-                .load(plannedMeal.getMeal().getStrMealThumb())
-                .apply(new RequestOptions())
-                .error(R.drawable.ic_launcher_background)
-                .into(binding.plannedImg);
-        binding.plannedTxt.setText(plannedMeal.getMeal().getStrMeal());
+    private List<PlannedMeal> filterPlannedMealsByDate(List<PlannedMeal> plannedMeals) {
+        List<PlannedMeal> filteredList = new ArrayList<>();
+        // Assuming date is stored in the format "yyyyMMdd"
+        for (PlannedMeal plannedMeal : plannedMeals) {
+            if (plannedMeal.getDate().equals(date)) {
+                filteredList.add(plannedMeal);
+            }
+        }
+        return filteredList;
+    }
+
+
+    @Override
+    public void onDelClick(PlannedMeal meal) {
+
+        presenter.deletePlannedMeal(meal);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }

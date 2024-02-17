@@ -56,6 +56,6 @@ public class LocalFavMealsDataSource implements ILocalFavMealsDataSource {
         Single<Meal> observable = mealDAO.getMealByID(mealID);
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(o -> dbDelegate.onSuccessLocalMeal((Meal) o));
+                .subscribe(o -> dbDelegate.onSuccessFavLocalMeal((Meal) o));
     }
 }

@@ -70,4 +70,10 @@ public class FavouriteFragment extends Fragment implements IFavourite, OnDeleteC
     public void onDelClick(Meal meal) {
         presenter.deleteFavMeal(meal);
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
+    }
 }

@@ -1,5 +1,6 @@
 package com.iti.mealmate;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -46,16 +47,24 @@ public class WelcomeFragment extends Fragment {
         binding.signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_welcomeFragment_to_signUpFragment3);
+                Navigation.findNavController(view).navigate(R.id.action_welcomeFragment_to_signUpFragment);
             }
         });
         binding.skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_welcomeFragment_to_homeFragment);
+                Intent intent = new Intent(getActivity(), MainActivity2.class);
+                startActivity(intent);
+                getActivity().finish();
+
             }
         });
 
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 
 

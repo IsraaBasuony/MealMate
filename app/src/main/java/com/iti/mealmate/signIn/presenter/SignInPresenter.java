@@ -20,8 +20,7 @@ public class SignInPresenter implements ISignInPresenter, FirebaseCallback {
     @Override
     public void onSuccess(String userId) {
 
-
-        UserSharedPref.setUserName(userId);
+        UserSharedPref.setUserId(userId);
         _view.onLoginSuccess(userId);
     }
 
@@ -34,7 +33,6 @@ public class SignInPresenter implements ISignInPresenter, FirebaseCallback {
     @Override
     public void signin(String email, String pass) {
         _repo.signIn(email,pass);
-
     }
 
     @Override

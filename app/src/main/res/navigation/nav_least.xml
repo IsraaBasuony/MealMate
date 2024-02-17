@@ -12,7 +12,8 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment2_to_fullDetailsFragment2"
-            app:destination="@id/fullDetailsFragment" />
+            app:destination="@id/fullDetailsFragment"
+            app:popUpTo="@id/homeFragment2" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment2"
@@ -21,7 +22,8 @@
         tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_searchFragment2_to_allMealsFragment"
-            app:destination="@id/allMealsFragment" />
+            app:destination="@id/allMealsFragment"
+            app:popUpTo="@id/searchFragment2" />
     </fragment>
     <fragment
         android:id="@+id/favouriteFragment"
@@ -30,7 +32,8 @@
         tools:layout="@layout/fragment_favourite" >
         <action
             android:id="@+id/action_favouriteFragment_to_fullDetailsFragment"
-            app:destination="@id/fullDetailsFragment" />
+            app:destination="@id/fullDetailsFragment"
+            app:popUpTo="@id/favouriteFragment" />
     </fragment>
     <fragment
         android:id="@+id/fullDetailsFragment"
@@ -44,6 +47,10 @@
             android:defaultValue="null" />
         <argument
             android:name="id"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="plannedMealID"
             app:argType="integer"
             android:defaultValue="0" />
     </fragment>
@@ -72,11 +79,17 @@
             android:defaultValue="0" />
         <action
             android:id="@+id/action_allMealsFragment_to_fullDetailsFragment"
-            app:destination="@id/fullDetailsFragment" />
+            app:destination="@id/fullDetailsFragment"
+            app:popUpTo="@id/allMealsFragment" />
     </fragment>
     <fragment
         android:id="@+id/calenderFragment"
         android:name="com.iti.mealmate.Calender.view.CalenderFragment"
         android:label="fragment_calender"
-        tools:layout="@layout/fragment_calender" />
+        tools:layout="@layout/fragment_calender" >
+        <action
+            android:id="@+id/action_calenderFragment_to_fullDetailsFragment"
+            app:destination="@id/fullDetailsFragment"
+            app:popUpTo="@id/calenderFragment" />
+    </fragment>
 </navigation>

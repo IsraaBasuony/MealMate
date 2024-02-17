@@ -1,10 +1,16 @@
 package com.iti.mealmate;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
+
+    private NavController navController;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

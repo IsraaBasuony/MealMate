@@ -1,5 +1,6 @@
 package com.iti.mealmate.db.plannedMeal;
 
+import com.iti.mealmate.db.favouriteMeal.DBDelegate;
 import com.iti.mealmate.model.Meal;
 import com.iti.mealmate.model.PlannedMeal;
 
@@ -14,5 +15,8 @@ public interface ILocalPlannedMealsDataSource {
     void deletePlanned(PlannedMeal plannedMeal);
 
     void insertPlanned(PlannedMeal plannedMeal);
+
+    void getLocalPlannedMeal(int plannedMealID, DBPlannedDelegate dbPlannedDelegate);
+
 
 }

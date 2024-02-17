@@ -1,6 +1,7 @@
 package com.iti.mealmate.fullDetail.presenter;
 
 import com.iti.mealmate.db.favouriteMeal.DBDelegate;
+import com.iti.mealmate.db.plannedMeal.DBPlannedDelegate;
 import com.iti.mealmate.db.plannedMeal.LocalPlannedMealsDataSource;
 import com.iti.mealmate.fullDetail.view.IFullDetails;
 import com.iti.mealmate.model.Meal;
@@ -11,7 +12,7 @@ import com.iti.mealmate.repo.plannedMeal.PlannedMealRepo;
 
 import java.util.List;
 
-public class FullDetailsPresenter implements IFullDetailsPresenter, NetworkCallbackMealDetails, DBDelegate {
+public class FullDetailsPresenter implements IFullDetailsPresenter, NetworkCallbackMealDetails, DBDelegate, DBPlannedDelegate {
 
     private IFullDetails _view;
     private MealsRepo _repo;
@@ -48,8 +49,14 @@ public class FullDetailsPresenter implements IFullDetailsPresenter, NetworkCallb
     }
 
     @Override
-    public void getFullLocalMeal(String mealID) {
+    public void getFullFavLocalMeal(String mealID) {
         _repo.getLocalMeal(mealID, this);
+
+    }
+
+    @Override
+    public void getFullPlannedLocalMeal(int plannedMealID) {
+        _repoPlanned.getLocalPlannedMeal(plannedMealID,this);
 
     }
 
@@ -60,8 +67,13 @@ public class FullDetailsPresenter implements IFullDetailsPresenter, NetworkCallb
     }
 
     @Override
-    public void onSuccessLocalMeal(Meal meal) {
+    public void onSuccessFavLocalMeal(Meal meal) {
         _view.onFullDetailedMealSuccess(meal);
 
+    }
+
+    @Override
+    public void onSuccessPlannedLocalMeal(Meal meal) {
+        _view.onFullDetailedMealSuccess(meal);
     }
 }

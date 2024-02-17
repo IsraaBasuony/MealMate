@@ -1,5 +1,6 @@
 package com.iti.mealmate;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,14 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.iti.mealmate.model.UserSharedPref;
+
 public class SplashFragment extends Fragment {
-
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -31,10 +30,17 @@ public class SplashFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        UserSharedPref.init(getActivity());
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Navigation.findNavController(view).navigate(R.id.action_splashFragment_to_welcomeFragment);
+                if(UserSharedPref.getUserId()==null){
+                    Navigation.findNavController(view).navigate(R.id.action_splashFragment_to_welcomeFragment);
+                }else{
+                    Intent intent = new Intent(getActivity(), MainActivity2.class);
+                    startActivity(intent);
+                    getActivity().finish();
+                }
             }
         }, 3000);
     }

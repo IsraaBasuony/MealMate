@@ -21,4 +21,7 @@ public interface PlannedMealDAO {
     void insertPlannedMeal(PlannedMeal plannedMeal);
     @Delete
     void deleteFromPlan(PlannedMeal plannedMeal);
+
+    @Query("SELECT * From PlannedMeal WHERE id = :id")
+    Single<PlannedMeal> getPlannedMealByID(int id);
 }

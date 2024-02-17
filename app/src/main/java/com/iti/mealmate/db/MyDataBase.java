@@ -13,7 +13,7 @@ import com.iti.mealmate.db.plannedMeal.PlannedMealDAO;
 import com.iti.mealmate.model.Meal;
 import com.iti.mealmate.model.PlannedMeal;
 
-@Database(entities = {Meal.class, PlannedMeal.class}, version = 2)
+@Database(entities = {Meal.class, PlannedMeal.class}, version = 3)
 @TypeConverters({Converters.class, MealConverter.class})
 public abstract class MyDataBase extends RoomDatabase {
     private static MyDataBase myDataBase = null;

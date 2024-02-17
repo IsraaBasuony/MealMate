@@ -8,7 +8,6 @@ import com.iti.mealmate.repo.meal.MealsRepo;
 import com.iti.mealmate.repo.plannedMeal.PlannedMealRepo;
 
 public class CalenderPresenter implements ICalenderPresenter {
-
     private PlannedMealRepo _repo;
     private ICalender _veiw;
     public CalenderPresenter(PlannedMealRepo _repo, ICalender _veiw) {

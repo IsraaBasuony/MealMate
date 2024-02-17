@@ -1,5 +1,6 @@
 package com.iti.mealmate.signUp.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.iti.mealmate.MainActivity2;
 import com.iti.mealmate.R;
 import com.iti.mealmate.databinding.FragmentSignUpBinding;
 import com.iti.mealmate.model.UserSharedPref;
@@ -81,7 +83,7 @@ public class SignUpFragment extends Fragment implements IViewSignUp{
         }
         else {
             _signUpPresenter.signUp(email, pass);
-            UserSharedPref.init(getActivity());
+            UserSharedPref.init(getContext().getApplicationContext());
             UserSharedPref.setUserName(name);
             UserSharedPref.setUserPassword(pass);
         }
@@ -106,12 +108,12 @@ public class SignUpFragment extends Fragment implements IViewSignUp{
             return false;
         return pat.matcher(email).matches();
     }
-
-
+    
     @Override
     public void onRegisterSuccess(String userId) {
-        Navigation.findNavController(requireView())
-                .navigate(R.id.action_signUpFragment_to_homeFragment);
+        Intent intent = new Intent(getActivity(), MainActivity2.class);
+        startActivity(intent);
+        getActivity().finish();
 
     }
     @Override

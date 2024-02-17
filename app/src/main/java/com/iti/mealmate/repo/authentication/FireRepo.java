@@ -7,14 +7,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.iti.mealmate.model.UserSharedPref;
 import com.iti.mealmate.network.FirebaseCallback;
-
 public class FireRepo implements IFireRepo {
     private final FirebaseAuth auth;
     private final FirebaseCallback firebaseCallback;
 
     public FireRepo(FirebaseCallback firebaseCallback) {
         this.firebaseCallback = firebaseCallback;
-        auth = FirebaseAuth.getInstance();
+        this.auth = FirebaseAuth.getInstance();
     }
 
     @Override

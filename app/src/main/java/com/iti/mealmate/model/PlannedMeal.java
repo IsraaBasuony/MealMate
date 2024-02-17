@@ -7,17 +7,25 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "PlannedMeal")
 public class PlannedMeal {
+    @NonNull
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    public int id;
     @ColumnInfo(name = "meal")
     private Meal meal;
-    @NonNull
-    @PrimaryKey
+
     @ColumnInfo(name = "date")
     private String date;
 
     public PlannedMeal() {
     }
 
-    public PlannedMeal( Meal meal,@NonNull String date) {
+    public PlannedMeal(@NonNull int id, Meal meal, String date) {
+        this.id = id;
+        this.meal = meal;
+        this.date = date;
+    }
+    public PlannedMeal( Meal meal, String date) {
         this.meal = meal;
         this.date = date;
     }

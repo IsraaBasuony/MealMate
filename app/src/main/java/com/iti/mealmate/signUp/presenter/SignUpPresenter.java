@@ -1,5 +1,4 @@
 package com.iti.mealmate.signUp.presenter;
-
 import com.iti.mealmate.model.UserSharedPref;
 import com.iti.mealmate.network.FirebaseCallback;
 import com.iti.mealmate.repo.authentication.FireRepo;
@@ -30,15 +29,12 @@ public class SignUpPresenter implements ISignUpPresenter, FirebaseCallback {
 
     @Override
     public void onSuccess(String userId) {
-
         UserSharedPref.setUserId(userId);
         _view.onRegisterSuccess(userId);
-
     }
 
     @Override
     public void onFail(String msg) {
         _view.onRegisterFail(msg);
-
     }
 }

@@ -135,4 +135,10 @@ public class AllMealsFragment extends Fragment implements IAllMeals {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
+    }
 }

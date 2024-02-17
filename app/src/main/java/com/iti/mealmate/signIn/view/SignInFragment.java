@@ -1,5 +1,6 @@
 package com.iti.mealmate.signIn.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.iti.mealmate.MainActivity2;
 import com.iti.mealmate.R;
 import com.iti.mealmate.databinding.FragmentSignInBinding;
 import com.iti.mealmate.model.UserSharedPref;
@@ -24,8 +26,9 @@ import java.util.regex.Pattern;
 
 public class SignInFragment extends Fragment implements IViewSignIn {
 
-FragmentSignInBinding binding;
-ISignInPresenter _signInPresenter;
+    FragmentSignInBinding binding;
+    ISignInPresenter _signInPresenter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,43 +57,39 @@ ISignInPresenter _signInPresenter;
             public void onClick(View view) {
                 validation();
 
-
             }
         });
 
 
     }
 
-    private void  validation() {
+    private void validation() {
         String email = binding.UserNameEdit.getText().toString().trim();
         String pass = binding.PasswordEdit.getText().toString().trim();
 
         if (email.isEmpty()) {
             binding.UserNameEdit.setError("Required");
-        }else if (pass.isEmpty()) {
+        } else if (pass.isEmpty()) {
             binding.passwordLayout.setError("Required");
-        }else if (!isValidEmail(email)) {
+        } else if (!isValidEmail(email)) {
             binding.UserNameEdit.setError("Invalid email");
-        } else if(!isValidPassword(pass))
-        {
+        } else if (!isValidPassword(pass)) {
             binding.passwordLayout.setError("Password must have at least 1 numeric character ,1 uppercase character,1 lowercase character,1 special symbol among @#$% and Password length should be(8:20).");
-        }
-        else {
-            UserSharedPref.init(getActivity());
+        } else {
+            UserSharedPref.init(getContext().getApplicationContext());
             _signInPresenter.signin(email, pass);
         }
     }
 
-    public  boolean isValidPassword(String password)
-    {
-        String regex= "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20}$";
+    public boolean isValidPassword(String password) {
+        String regex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(password);
         return matcher.matches();
     }
-    public  boolean isValidEmail(String email)
-    {
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+
+    public boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
                 "[a-zA-Z0-9_+&*-]+)*@" +
                 "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
                 "A-Z]{2,7}$";
@@ -103,8 +102,9 @@ ISignInPresenter _signInPresenter;
 
     @Override
     public void onLoginSuccess(String userId) {
-        Navigation.findNavController(requireView()).navigate(R.id.action_signInFragment_to_homeFragment);
-
+        Intent intent = new Intent(getActivity(), MainActivity2.class);
+        startActivity(intent);
+        getActivity().finish();
     }
 
     @Override

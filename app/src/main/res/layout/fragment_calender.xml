@@ -31,61 +31,12 @@
         app:layout_constraintTop_toBottomOf="@id/txt"
         />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/planned_card"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_margin="8dp"
-        android:layout_marginEnd="16dp"
-        android:checkable="true"
-        android:clickable="true"
-        android:elevation="8dp"
-        android:focusable="true"
-        app:cardCornerRadius="40dp"
-        app:cardElevation="4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/calendar_view"
-        app:strokeWidth="0dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/planned_img"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                android:src="@drawable/back3"
-                app:civ_border_color="@color/secondry_butto"
-                app:civ_border_width="1dp" />
-
-            <TextView
-                android:id="@+id/planned_txt"
-                style="@style/poppinsMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:padding="2dp"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:textSize="14sp" />
-        </LinearLayout>
-        <Button
-            android:id="@+id/btn_del_plan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_margin="@dimen/_12sdp"
-            android:background="@drawable/btn_bg2"
-            android:padding="@dimen/_8sdp"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-
-    </com.google.android.material.card.MaterialCardView>
-
-
+   <androidx.recyclerview.widget.RecyclerView
+       android:id="@+id/planned_rec"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       app:layout_constraintTop_toBottomOf="@id/calendar_view"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+/>
 </androidx.constraintlayout.widget.ConstraintLayout>

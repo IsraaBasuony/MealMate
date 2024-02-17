@@ -3,11 +3,15 @@ package com.iti.mealmate.db.plannedMeal;
 import android.content.Context;
 
 import com.iti.mealmate.db.MyDataBase;
+import com.iti.mealmate.model.Meal;
 import com.iti.mealmate.model.PlannedMeal;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class LocalPlannedMealsDataSource implements ILocalPlannedMealsDataSource {
 
@@ -48,5 +52,13 @@ public class LocalPlannedMealsDataSource implements ILocalPlannedMealsDataSource
             }
         }).start();
 
+    }
+
+    @Override
+    public void getLocalPlannedMeal(int plannedMealID, DBPlannedDelegate dbPlannedDelegate) {
+        Single<PlannedMeal> observable = plannedMealDAO.getPlannedMealByID(plannedMealID);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(o -> dbPlannedDelegate.onSuccessPlannedLocalMeal((Meal) o.getMeal()));
     }
 }

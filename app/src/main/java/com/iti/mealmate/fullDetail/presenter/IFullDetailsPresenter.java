@@ -7,7 +7,10 @@ public interface IFullDetailsPresenter {
     void getFullDetailedMeal(String mealID);
      void addToFav(Meal meal);
 
-    void getFullLocalMeal(String mealID);
+    void getFullFavLocalMeal(String mealID);
+
+    void getFullPlannedLocalMeal(int mealID);
+
 
     void  addToPlan(PlannedMeal plannedMeal);
 

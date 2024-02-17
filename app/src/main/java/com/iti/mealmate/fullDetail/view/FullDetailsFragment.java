@@ -65,13 +65,18 @@ public class FullDetailsFragment extends Fragment implements IFullDetails {
         binding.ingrediantRec.setAdapter(adapter);
         String mealID = FullDetailsFragmentArgs.fromBundle(getArguments()).getMealID();
         int id = FullDetailsFragmentArgs.fromBundle(getArguments()).getId();
+        int plannedID = FullDetailsFragmentArgs.fromBundle(getArguments()).getPlannedMealID();
+
         presenter = new FullDetailsPresenter(this, MealsRepo.getInstance(RemoteDataSource.getInstance(), LocalFavMealsDataSource.getInstance(getContext())), PlannedMealRepo.getInstance(RemoteDataSource.getInstance(), LocalPlannedMealsDataSource.getInstance(getContext())));
 
         if (id == 1) {
-            presenter.getFullLocalMeal(mealID);
+            presenter.getFullFavLocalMeal(mealID);
             binding.btntnFav.setVisibility(View.GONE);
+        } else if(id == 2){
+            presenter.getFullPlannedLocalMeal(plannedID);
+            binding.btnCalenar.setVisibility(View.GONE);
 
-        } else {
+        }else {
             presenter.getFullDetailedMeal(mealID);
         }
     }
@@ -139,7 +144,7 @@ public class FullDetailsFragment extends Fragment implements IFullDetails {
                             }
                         }, year, month, day);
                 datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 100);
-                calendar.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+                calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
                 datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
                 datePickerDialog.show();
             }
@@ -175,5 +180,11 @@ public class FullDetailsFragment extends Fragment implements IFullDetails {
         }
         return videoId;
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }

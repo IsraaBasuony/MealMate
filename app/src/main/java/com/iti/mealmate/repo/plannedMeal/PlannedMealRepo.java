@@ -1,4 +1,6 @@
 package com.iti.mealmate.repo.plannedMeal;
+import com.iti.mealmate.db.favouriteMeal.DBDelegate;
+import com.iti.mealmate.db.plannedMeal.DBPlannedDelegate;
 import com.iti.mealmate.db.plannedMeal.LocalPlannedMealsDataSource;
 import com.iti.mealmate.model.PlannedMeal;
 import com.iti.mealmate.network.RemoteDataSource;
@@ -10,7 +12,6 @@ public class PlannedMealRepo implements IPlannedMealRepo{
 
     RemoteDataSource remoteDataSource;
     LocalPlannedMealsDataSource localPlannedMealsDataSource;
-
     private  static PlannedMealRepo repo = null;
     public  static  PlannedMealRepo getInstance(RemoteDataSource remoteDataSource, LocalPlannedMealsDataSource localDataSource){
         if(repo == null){
@@ -42,5 +43,11 @@ public class PlannedMealRepo implements IPlannedMealRepo{
         localPlannedMealsDataSource.insertPlanned(plannedMeal);
 
     }
+
+    @Override
+    public void getLocalPlannedMeal(int plannedMealId, DBPlannedDelegate dbPlannedDelegate) {
+        localPlannedMealsDataSource.getLocalPlannedMeal(plannedMealId, dbPlannedDelegate);
+    }
+
 
 }
