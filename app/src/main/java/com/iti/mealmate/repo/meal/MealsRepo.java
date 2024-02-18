@@ -19,6 +19,7 @@ import com.iti.mealmate.network.RemoteDataSource;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Flowable;
 
 public class MealsRepo implements IMealsRepo {
@@ -27,6 +28,7 @@ public class MealsRepo implements IMealsRepo {
     LocalPlannedMealsDataSource localPlannedMealsDataSource;
 
     private  static MealsRepo repo = null;
+
     public  static  MealsRepo getInstance(RemoteDataSource remoteDataSource, LocalFavMealsDataSource localDataSource){
         if(repo == null){
             repo = new MealsRepo(remoteDataSource, localDataSource);
@@ -112,6 +114,10 @@ public class MealsRepo implements IMealsRepo {
         localDataSource.getLocalMeal(mealId , dbDelegate);
     }
 
+    @Override
+    public Completable deleteFavTableRoom() {
+        return localDataSource.deleteFavTableRoom();
+    }
 
 
 }

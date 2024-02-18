@@ -9,6 +9,7 @@ import com.iti.mealmate.model.PlannedMeal;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -60,5 +61,11 @@ public class LocalPlannedMealsDataSource implements ILocalPlannedMealsDataSource
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(o -> dbPlannedDelegate.onSuccessPlannedLocalMeal((Meal) o.getMeal()));
+    }
+
+    @Override
+    public Completable deletePlannedTableRoom() {
+        return plannedMealDAO.deletePlannedTableRoom();
+
     }
 }

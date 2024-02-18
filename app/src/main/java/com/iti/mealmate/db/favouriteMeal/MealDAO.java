@@ -6,6 +6,8 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import com.iti.mealmate.model.Meal;
 import java.util.List;
+
+import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
 
@@ -20,5 +22,9 @@ public interface MealDAO {
 
     @Query("SELECT * From FavMeals WHERE id = :mealID")
     Single<Meal> getMealByID(String mealID);
+
+    @Query("DELETE FROM FavMeals")
+    Completable deleteFavTableRoom();
+
 
 }

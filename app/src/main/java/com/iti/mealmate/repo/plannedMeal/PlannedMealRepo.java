@@ -5,6 +5,8 @@ import com.iti.mealmate.db.plannedMeal.LocalPlannedMealsDataSource;
 import com.iti.mealmate.model.PlannedMeal;
 import com.iti.mealmate.network.RemoteDataSource;
 import java.util.List;
+
+import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Flowable;
 
 public class PlannedMealRepo implements IPlannedMealRepo{
@@ -47,6 +49,11 @@ public class PlannedMealRepo implements IPlannedMealRepo{
     @Override
     public void getLocalPlannedMeal(int plannedMealId, DBPlannedDelegate dbPlannedDelegate) {
         localPlannedMealsDataSource.getLocalPlannedMeal(plannedMealId, dbPlannedDelegate);
+    }
+
+    @Override
+    public Completable deletePlannedTableRoom() {
+        return localPlannedMealsDataSource.deletePlannedTableRoom();
     }
 
 

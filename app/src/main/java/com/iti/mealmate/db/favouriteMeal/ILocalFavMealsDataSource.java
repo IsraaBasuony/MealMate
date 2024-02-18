@@ -3,6 +3,7 @@ import com.iti.mealmate.model.Meal;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Flowable;
 
 public interface ILocalFavMealsDataSource {
@@ -12,4 +13,5 @@ public interface ILocalFavMealsDataSource {
     void insert(Meal meal);
 
     void getLocalMeal(String mealID, DBDelegate dbDelegate);
+    Completable deleteFavTableRoom();
 }

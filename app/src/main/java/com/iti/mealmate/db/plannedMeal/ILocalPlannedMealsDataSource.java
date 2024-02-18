@@ -6,6 +6,7 @@ import com.iti.mealmate.model.PlannedMeal;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Flowable;
 
 public interface ILocalPlannedMealsDataSource {
@@ -17,6 +18,7 @@ public interface ILocalPlannedMealsDataSource {
     void insertPlanned(PlannedMeal plannedMeal);
 
     void getLocalPlannedMeal(int plannedMealID, DBPlannedDelegate dbPlannedDelegate);
+    Completable deletePlannedTableRoom();
 
 
 }

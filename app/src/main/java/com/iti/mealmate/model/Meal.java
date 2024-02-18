@@ -22,6 +22,10 @@ public class Meal {
 
     @ColumnInfo(name = "day")
     public int day;
+
+    public Meal() {
+    }
+
     @ColumnInfo(name = "month")
     public  int month;
 

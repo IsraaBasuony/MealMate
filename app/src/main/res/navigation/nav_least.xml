@@ -92,4 +92,9 @@
             app:destination="@id/fullDetailsFragment"
             app:popUpTo="@id/calenderFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.iti.mealmate.profile.view.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

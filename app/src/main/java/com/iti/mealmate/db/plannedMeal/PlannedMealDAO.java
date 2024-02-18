@@ -11,6 +11,7 @@ import com.iti.mealmate.model.PlannedMeal;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
 @Dao
@@ -24,4 +25,8 @@ public interface PlannedMealDAO {
 
     @Query("SELECT * From PlannedMeal WHERE id = :id")
     Single<PlannedMeal> getPlannedMealByID(int id);
+
+
+    @Query("DELETE FROM PlannedMeal")
+    Completable deletePlannedTableRoom();
 }

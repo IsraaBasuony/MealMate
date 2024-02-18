@@ -62,5 +62,9 @@ public class FireRepo implements IFireRepo {
     public void logout() {
 
         auth.signOut();
+        UserSharedPref.setUserId(null);
+        UserSharedPref.setUserName(null);
+        UserSharedPref.setUserPassword(null);
+        UserSharedPref.setUserEmail(null);
     }
 }

@@ -5,6 +5,7 @@ import com.iti.mealmate.model.PlannedMeal;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Flowable;
 
 public interface IPlannedMealRepo {
@@ -14,4 +15,5 @@ public interface IPlannedMealRepo {
     void deletePlannedMeal(PlannedMeal plannedMeal);
     void insertPlannedMeal(PlannedMeal plannedMeal);
     public void getLocalPlannedMeal(int plannedMealId, DBPlannedDelegate dbPlannedDelegate);
+    Completable deletePlannedTableRoom();
 }

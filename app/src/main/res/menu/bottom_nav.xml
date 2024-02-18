@@ -21,7 +21,7 @@
         android:icon="@drawable/calendar"/>
 
     <item
-        android:id="@+id/profilebtn"
+        android:id="@+id/profileFragment"
         android:title="@string/profile"
         android:icon="@drawable/person"/>
 

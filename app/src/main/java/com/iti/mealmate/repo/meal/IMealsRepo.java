@@ -15,6 +15,7 @@ import com.iti.mealmate.network.NetworkCallbackRandom;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Flowable;
 
 public interface IMealsRepo {
@@ -36,6 +37,8 @@ public interface IMealsRepo {
     void delete(Meal meal);
     void insert(Meal meal);
     void getLocalMeal(String mealId, DBDelegate dbDelegate);
+    Completable deleteFavTableRoom();
+
 
 
 }

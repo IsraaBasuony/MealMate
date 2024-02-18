@@ -7,6 +7,7 @@ import com.iti.mealmate.model.Meal;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -57,5 +58,10 @@ public class LocalFavMealsDataSource implements ILocalFavMealsDataSource {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(o -> dbDelegate.onSuccessFavLocalMeal((Meal) o));
+    }
+
+    @Override
+    public Completable deleteFavTableRoom() {
+                return mealDAO.deleteFavTableRoom();
     }
 }
