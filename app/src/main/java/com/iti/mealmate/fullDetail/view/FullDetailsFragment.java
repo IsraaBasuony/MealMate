@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.widget.DatePicker;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -26,6 +27,7 @@ import com.iti.mealmate.databinding.FragmentFullDetailsBinding;
 import com.iti.mealmate.db.favouriteMeal.LocalFavMealsDataSource;
 import com.iti.mealmate.db.plannedMeal.LocalPlannedMealsDataSource;
 import com.iti.mealmate.fullDetail.presenter.FullDetailsPresenter;
+import com.iti.mealmate.model.FlagSource;
 import com.iti.mealmate.model.Meal;
 import com.iti.mealmate.model.PlannedMeal;
 import com.iti.mealmate.network.RemoteDataSource;
@@ -42,6 +44,9 @@ public class FullDetailsFragment extends Fragment implements IFullDetails {
     FullDetailsPresenter presenter;
     FulIngradientAdapter adapter;
     LinearLayoutManager layoutManager;
+    boolean isFavorite = false;
+    private FlagSource flagSource = new FlagSource();
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -115,11 +120,22 @@ public class FullDetailsFragment extends Fragment implements IFullDetails {
 
 
         binding.areaName.setText(meal.getStrArea());
+        binding.flag.setImageResource(flagSource.getFlagIdByName(meal.getStrArea()));
+        binding.categoryName.setText(meal.getStrCategory());
         binding.btntnFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                isFavorite = !isFavorite;
+                if (isFavorite) {
+                   binding.btntnFav.setImageResource(R.drawable.favorite_fill);
+                } else {
+                    binding.btntnFav.setImageResource(R.drawable.ic_fav_unfill);
+                }
+
                 presenter.addToFav(meal);
                 Log.i("TAG", "onClick: " + meal.getImage().getByteCount());
+                Toast.makeText(getContext(), "added to Favourite", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -157,7 +173,7 @@ public class FullDetailsFragment extends Fragment implements IFullDetails {
         String video = "<iframe width=\"100%\" height=\"100%\" src=\"" + embeddedVideoUrl + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
         binding.video.loadData(video, "text/html", "utf-8");
         binding.video.getSettings().setJavaScriptEnabled(true);
-        binding.video.setWebChromeClient(new WebChromeClient());
+       binding.video.setWebChromeClient(new WebChromeClient());
     }
 
     @Override

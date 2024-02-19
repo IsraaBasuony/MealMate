@@ -3,19 +3,23 @@
     android:layout_width="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content"
+    android:padding="4dp"
+
     >
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/category_card"
         android:layout_width="180dp"
         android:layout_height="180dp"
         android:layout_margin="8dp"
-        android:layout_marginEnd="16dp"
         android:checkable="true"
         android:clickable="true"
-        android:focusable="true"
-        app:cardElevation="4dp"
         android:elevation="8dp"
+        android:focusable="true"
         app:cardCornerRadius="40dp"
+        app:cardElevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:strokeWidth="0dp">
@@ -24,30 +28,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/category_img"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                app:civ_border_width="1dp"
-                app:civ_border_color="@color/secondry_butto"
                 android:layout_gravity="center"
-                android:layout_marginBottom="8dp"
                 android:layout_marginTop="16dp"
-                />
+                android:layout_marginBottom="8dp"
+                app:civ_border_color="@color/secondry_butto"
+                app:civ_border_width="1dp" />
 
-            <TextView
-                android:id="@+id/category_txt"
-                style="@style/poppinsMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textSize="14sp"
-                android:padding="2dp"
-                android:gravity="center"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:textAppearance="?attr/textAppearanceHeadline6" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/category_txt"
+            style="@style/poppinsMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="2"
+            android:padding="2dp"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textSize="14sp" />
 
     </com.google.android.material.card.MaterialCardView>
 

@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.iti.mealmate.MainActivity2;
+import com.iti.mealmate.HomeActivity;
 import com.iti.mealmate.R;
 import com.iti.mealmate.databinding.FragmentSignInBinding;
 import com.iti.mealmate.model.UserSharedPref;
@@ -59,6 +59,13 @@ public class SignInFragment extends Fragment implements IViewSignIn {
 
             }
         });
+        binding.guest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), HomeActivity.class));
+                getActivity().finish();
+            }
+        });
 
 
     }
@@ -102,7 +109,7 @@ public class SignInFragment extends Fragment implements IViewSignIn {
 
     @Override
     public void onLoginSuccess(String userId) {
-        Intent intent = new Intent(getActivity(), MainActivity2.class);
+        Intent intent = new Intent(getActivity(), HomeActivity.class);
         startActivity(intent);
         getActivity().finish();
     }

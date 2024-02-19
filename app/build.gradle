@@ -72,6 +72,8 @@ dependencies {
     annotationProcessor 'androidx.room:room-compiler:2.4.1'
     implementation 'androidx.room:room-runtime:2.4.1'
 
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+
     //scalable unit text size
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
 

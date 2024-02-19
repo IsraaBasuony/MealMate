@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WelcomeFragment">
+    tools:context=".WelcomActivity">
 
     <ImageView
         android:id="@+id/welcome_img"
@@ -51,7 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appName"
-       android:maxLines="2"
+        android:maxLines="2"
         android:gravity="center"
         />
 
@@ -81,13 +81,13 @@
         android:text="@string/sign_up"
         android:textSize="20sp"
         app:cornerRadius="20dp"
-        app:layout_constraintBottom_toTopOf="@id/skip"
+        app:layout_constraintBottom_toTopOf="@id/start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintWidth_percent="0.7" />
 
     <TextView
-        android:id="@+id/skip"
+        android:id="@+id/start"
         style="@style/poppinsMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -110,5 +110,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
 
+</androidx.constraintlayout.widget.ConstraintLayout>

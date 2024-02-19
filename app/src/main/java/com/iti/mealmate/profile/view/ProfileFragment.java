@@ -12,27 +12,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.iti.mealmate.MainActivity;
-import com.iti.mealmate.MainActivity2;
-import com.iti.mealmate.R;
+import com.iti.mealmate.AuthActivity;
 import com.iti.mealmate.databinding.FragmentProfileBinding;
 import com.iti.mealmate.db.favouriteMeal.LocalFavMealsDataSource;
 import com.iti.mealmate.db.plannedMeal.LocalPlannedMealsDataSource;
 import com.iti.mealmate.network.RemoteDataSource;
 import com.iti.mealmate.profile.presenter.ProfilePresenter;
-import com.iti.mealmate.repo.authentication.FireRepo;
 import com.iti.mealmate.repo.meal.MealsRepo;
 import com.iti.mealmate.repo.plannedMeal.PlannedMealRepo;
 
 public class ProfileFragment extends Fragment implements IProfile{
-
     FragmentProfileBinding binding;
     ProfilePresenter presenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -52,7 +47,7 @@ public class ProfileFragment extends Fragment implements IProfile{
             @Override
             public void onClick(View view) {
                 onLogoutSuccess();
-                Intent intent = new Intent(getActivity(), MainActivity.class);
+                Intent intent = new Intent(getActivity(), AuthActivity.class);
                 startActivity(intent);
                 getActivity().finish();
             }

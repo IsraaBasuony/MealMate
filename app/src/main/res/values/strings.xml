@@ -17,4 +17,7 @@
     <string name="calender">Calender</string>
     <string name="profile">Profile</string>
     <string name="today_s_suggested_meal">Today\'s suggested meal:</string>
+    <string name="youtube">Youtube:</string>
+    <string name="ingredients">Ingredients:</string>
+    <string name="instructions">Instructions:</string>
 </resources>

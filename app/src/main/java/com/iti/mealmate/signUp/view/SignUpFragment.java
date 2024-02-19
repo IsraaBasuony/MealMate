@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.iti.mealmate.MainActivity2;
+import com.iti.mealmate.HomeActivity;
 import com.iti.mealmate.R;
 import com.iti.mealmate.databinding.FragmentSignUpBinding;
 import com.iti.mealmate.model.UserSharedPref;
@@ -111,7 +111,7 @@ public class SignUpFragment extends Fragment implements IViewSignUp{
     
     @Override
     public void onRegisterSuccess(String userId) {
-        Intent intent = new Intent(getActivity(), MainActivity2.class);
+        Intent intent = new Intent(getActivity(), HomeActivity.class);
         startActivity(intent);
         getActivity().finish();
 
