@@ -15,8 +15,8 @@
         style="@style/poppinsBold"
         android:textColor="@color/primary"
         android:textStyle="bold"
-        android:textSize="24sp"
-        android:text="Week Plan:"
+        android:textSize="18sp"
+        android:text="Your Week Plan:"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
@@ -31,12 +31,27 @@
         app:layout_constraintTop_toBottomOf="@id/txt"
         />
 
-   <androidx.recyclerview.widget.RecyclerView
-       android:id="@+id/planned_rec"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       app:layout_constraintTop_toBottomOf="@id/calendar_view"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"
-/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/planned_rec"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/calendar_view" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/no_internet_image"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_200sdp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendar_view"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/noconnect" />
 </androidx.constraintlayout.widget.ConstraintLayout>

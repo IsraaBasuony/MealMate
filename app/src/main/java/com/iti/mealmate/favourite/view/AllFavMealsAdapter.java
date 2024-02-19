@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,7 +45,10 @@ public class AllFavMealsAdapter extends RecyclerView.Adapter<AllFavMealsAdapter.
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Meal meal = mealModelArrayList.get(position);
         holder.mealName.setText(mealModelArrayList.get(position).getStrMeal());
-        holder.mealThumb.setImageBitmap(mealModelArrayList.get(position).getImage());
+        Glide.with(holder.itemView.getContext()).load(mealModelArrayList.get(position).getStrMealThumb())
+                .placeholder(R.drawable.world_pasta_day)
+                .error(R.drawable.world_pasta_day)
+                .into(holder.mealThumb);
         holder.btnDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,7 +84,7 @@ public class AllFavMealsAdapter extends RecyclerView.Adapter<AllFavMealsAdapter.
         TextView mealName;
         ImageView mealThumb;
         CardView cardView;
-        Button btnDel;
+        ImageButton btnDel;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

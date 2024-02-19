@@ -10,5 +10,4 @@ public interface IViewHome {
     void showMealOfTheDay(MealModel mealModel);
     void showAllMeals(List<MealModel> meals);
     public void showErrMsg(String errorMsg);
-    void showAllCategories(List<Category> categoryList);
 }

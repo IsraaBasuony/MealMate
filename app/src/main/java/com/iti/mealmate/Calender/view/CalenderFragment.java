@@ -36,16 +36,17 @@ import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class CalenderFragment extends Fragment implements ICalender,OnDeleteClickListener {
+public class CalenderFragment extends Fragment implements ICalender, OnDeleteClickListener {
 
     FragmentCalenderBinding binding;
     CalenderPresenter presenter;
     AllPlannedMealsAdapter adapter;
     LinearLayoutManager layoutManager;
     String date;
-    PlannedMeal plannedMeal;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,9 +65,9 @@ public class CalenderFragment extends Fragment implements ICalender,OnDeleteClic
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        adapter = new AllPlannedMealsAdapter(getContext(),this, new ArrayList<>());
+        adapter = new AllPlannedMealsAdapter(getContext(), this, new ArrayList<>());
         layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
         presenter = new CalenderPresenter(PlannedMealRepo.getInstance(RemoteDataSource.getInstance(), LocalPlannedMealsDataSource.getInstance(getContext())), this);
         binding.calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -78,24 +79,38 @@ public class CalenderFragment extends Fragment implements ICalender,OnDeleteClic
 
         binding.plannedRec.setLayoutManager(layoutManager);
         binding.plannedRec.setAdapter(adapter);
-
-
     }
 
     @Override
     public void setPlannedMeal(Flowable<List<PlannedMeal>> mealList) {
-        mealList
+       mealList
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(plannedMeals -> filterPlannedMealsByDate(plannedMeals)) // Filter by date
                 .subscribe(
-                        filteredList -> adapter.setList((ArrayList<PlannedMeal>) filteredList),
-                        e -> Toast.makeText(getContext(), "Empty", Toast.LENGTH_SHORT).show());
+                        filteredList -> {
+                            if (filteredList != null && !filteredList.isEmpty()) {
+                                // List is not empty or null
+                                binding.noInternetImage.setVisibility(View.GONE);
+                                binding.plannedRec.setVisibility(View.VISIBLE);
+                                adapter.setList((ArrayList<PlannedMeal>) filteredList);
+                                adapter.notifyDataSetChanged();
+                            } else {
+                                binding.plannedRec.setVisibility(View.GONE);
+                                binding.noInternetImage.setVisibility(View.VISIBLE);
+
+                            }
+                        },
+                        e -> {
+                            // Handle error
+                            Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                );
     }
+
 
     private List<PlannedMeal> filterPlannedMealsByDate(List<PlannedMeal> plannedMeals) {
         List<PlannedMeal> filteredList = new ArrayList<>();
-        // Assuming date is stored in the format "yyyyMMdd"
         for (PlannedMeal plannedMeal : plannedMeals) {
             if (plannedMeal.getDate().equals(date)) {
                 filteredList.add(plannedMeal);
@@ -104,16 +119,10 @@ public class CalenderFragment extends Fragment implements ICalender,OnDeleteClic
         return filteredList;
     }
 
-
     @Override
     public void onDelClick(PlannedMeal meal) {
 
         presenter.deletePlannedMeal(meal);
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        binding = null;
-    }
 }

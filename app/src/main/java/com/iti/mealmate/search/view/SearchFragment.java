@@ -1,5 +1,10 @@
 package com.iti.mealmate.search.view;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkRequest;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +15,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -73,24 +80,6 @@ public class SearchFragment extends Fragment implements ISearchFragment {
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         searchPresenter = new SearchPresenter(this, MealsRepo.getInstance(RemoteDataSource.getInstance(), LocalFavMealsDataSource.getInstance(getContext())));
 
-
-        if (getArguments() != null) {
-            type = getArguments().getString("type");
-            switch (type) {
-                case "Category":
-                    searchPresenter.getCategories();
-                    break;
-                case "Country":
-                    searchPresenter.getAllCountries();
-                    break;
-                case "Ingredient":
-                    searchPresenter.getAllIngredients();
-                    break;
-            }
-        } else {
-
-            searchPresenter.getCategories();
-        }
         setRecyclerV();
 
 
@@ -122,6 +111,10 @@ public class SearchFragment extends Fragment implements ISearchFragment {
         });
 
     }
+
+
+
+
 
     private void filterCategories(String searchTxt) {
         Observable<Category> categoryObservable = Observable.fromIterable(categoryList)
@@ -192,6 +185,76 @@ public class SearchFragment extends Fragment implements ISearchFragment {
     }
 
 
+
+    public void onStart() {
+        super.onStart();
+        NetworkRequest networkRequest = getNetworkRequest();
+
+        Handler mHandler = new Handler(Looper.getMainLooper());
+        ConnectivityManager.NetworkCallback networkCallback = getNetworkCallback(mHandler);
+        ConnectivityManager connectivityManager = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        connectivityManager.requestNetwork(networkRequest , networkCallback);
+    }
+
+    @NonNull
+    private ConnectivityManager.NetworkCallback getNetworkCallback(Handler mHandler) {
+        ConnectivityManager.NetworkCallback networkCallback = new ConnectivityManager.NetworkCallback(){
+            @Override
+            public void onAvailable(@NonNull Network network) {
+                super.onAvailable(network);
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("ISraa", "run: " + "here");
+                        binding.noInternetLayout.setVisibility(View.GONE);
+                        binding.internetSearch.setVisibility(View.VISIBLE);
+                        if (getArguments() != null) {
+                            type = getArguments().getString("type");
+                            switch (type) {
+                                case "Category":
+                                    searchPresenter.getCategories();
+                                    break;
+                                case "Country":
+                                    searchPresenter.getAllCountries();
+                                    break;
+                                case "Ingredient":
+                                    searchPresenter.getAllIngredients();
+                                    break;
+                            }
+                        } else {
+
+                            searchPresenter.getCategories();
+                        }
+                        setRecyclerV();
+                    }
+                });
+            }
+            @Override
+            public void onLost(@NonNull Network network) {
+                super.onLost(network);
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("ISraa", "run: " + "here lost");
+                        binding.internetSearch.setVisibility(View.GONE);
+                        binding.noInternetLayout.setVisibility(View.VISIBLE);
+                    }
+                });
+            }
+        };
+        return networkCallback;
+    }
+
+    private static NetworkRequest getNetworkRequest() {
+        NetworkRequest networkRequest = new NetworkRequest.Builder()
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
+                .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+                .build();
+        return networkRequest;
+    }
+
+
     @Override
     public void showAllCategories(List<Category> categoryList) {
         this.categoryList = (ArrayList<Category>) categoryList;
@@ -226,9 +289,4 @@ public class SearchFragment extends Fragment implements ISearchFragment {
         dialog.show();
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        binding = null;
-    }
 }

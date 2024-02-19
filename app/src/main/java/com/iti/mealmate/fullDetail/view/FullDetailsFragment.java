@@ -30,6 +30,7 @@ import com.iti.mealmate.fullDetail.presenter.FullDetailsPresenter;
 import com.iti.mealmate.model.FlagSource;
 import com.iti.mealmate.model.Meal;
 import com.iti.mealmate.model.PlannedMeal;
+import com.iti.mealmate.model.UserSharedPref;
 import com.iti.mealmate.network.RemoteDataSource;
 import com.iti.mealmate.repo.meal.MealsRepo;
 import com.iti.mealmate.repo.plannedMeal.PlannedMealRepo;
@@ -74,6 +75,10 @@ public class FullDetailsFragment extends Fragment implements IFullDetails {
 
         presenter = new FullDetailsPresenter(this, MealsRepo.getInstance(RemoteDataSource.getInstance(), LocalFavMealsDataSource.getInstance(getContext())), PlannedMealRepo.getInstance(RemoteDataSource.getInstance(), LocalPlannedMealsDataSource.getInstance(getContext())));
 
+        if(UserSharedPref.getUserId()== null){
+            binding.btntnFav.setVisibility(View.GONE);
+            binding.btnCalenar.setVisibility(View.GONE);
+        }
         if (id == 1) {
             presenter.getFullFavLocalMeal(mealID);
             binding.btntnFav.setVisibility(View.GONE);

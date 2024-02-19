@@ -5,9 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
+
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -17,6 +22,7 @@ import com.iti.mealmate.model.UserSharedPref;
 public class HomeActivity extends AppCompatActivity {
     private NavController navController;
     ActivityHomeBinding binding;
+    Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +46,6 @@ public class HomeActivity extends AppCompatActivity {
                 if (item.getItemId() == R.id.favouriteFragment || item.getItemId() == R.id.profileFragment || item.getItemId() == R.id.calenderFragment)
                     showLoginPopup();
                 else {
-
-
                     if (item.getItemId() == R.id.searchFragment2)
                         navController.navigate(R.id.searchFragment2);
 
@@ -57,17 +61,29 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void showLoginPopup() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Login Required")
-                .setMessage("You need to login to access this feature.")
-                .setPositiveButton("Login", (dialog, which) -> {
-                    startActivity(new Intent(HomeActivity.this, AuthActivity.class));
-                    finish();
-                })
-                .setNegativeButton("Cancel", (dialog, which) -> {
-                    Toast.makeText(HomeActivity.this, "Action canceled", Toast.LENGTH_SHORT).show();
-                })
-                .show();
+
+        dialog = new Dialog(this);
+        dialog.setContentView(R.layout.custome_dialog);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
+        Button loginTxt = dialog.findViewById(R.id.login_txt);
+        ImageButton close = dialog.findViewById(R.id.btn_close);
+
+        loginTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeActivity.this, AuthActivity.class));
+                finish();
+            }
+        });
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                Toast.makeText(HomeActivity.this, "Cancel", Toast.LENGTH_SHORT).show();
+            }
+        });
+        dialog.show();
     }
 
     @Override

@@ -6,4 +6,6 @@
     <color name="primary_button">#94E44B1A</color>
     <color name="secondry">#F59E5D</color>
     <color name="secondry_butto">#7AF59E5D</color>
+    <color name="transparent">#00FFFFFF</color>
+
 </resources>

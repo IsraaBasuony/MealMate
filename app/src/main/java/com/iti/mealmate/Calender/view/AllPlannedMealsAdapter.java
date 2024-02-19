@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ import androidx.cardview.widget.CardView;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.iti.mealmate.R;
 import com.iti.mealmate.favourite.view.FavouriteFragmentDirections;
 import com.iti.mealmate.model.Meal;
@@ -43,12 +45,17 @@ public class AllPlannedMealsAdapter extends RecyclerView.Adapter<AllPlannedMeals
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         PlannedMeal plannedMeal = plannedMealArrayList.get(position);
         holder.mealName.setText(plannedMealArrayList.get(position).getMeal().getStrMeal());
-         holder.btnDel.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View view) {
-                 listener.onDelClick(plannedMeal);
-             }
-         });
+
+        Glide.with(holder.itemView.getContext()).load(plannedMealArrayList.get(position).getMeal().getStrMealThumb())
+                .placeholder(R.drawable.world_pasta_day)
+                .error(R.drawable.world_pasta_day)
+                .into(holder.plannedImg);
+        holder.btnDel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onDelClick(plannedMeal);
+            }
+        });
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,7 +82,8 @@ public class AllPlannedMealsAdapter extends RecyclerView.Adapter<AllPlannedMeals
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView mealName;
-        Button btnDel;
+        ImageButton btnDel;
+        ImageView plannedImg;
         CardView cardView;
 
 
@@ -84,6 +92,7 @@ public class AllPlannedMealsAdapter extends RecyclerView.Adapter<AllPlannedMeals
             mealName = itemView.findViewById(R.id.planned_txt);
             btnDel = itemView.findViewById(R.id.btn_del_plan);
             cardView = itemView.findViewById(R.id.planned_card);
+            plannedImg = itemView.findViewById(R.id.planned_img);
 
 
         }

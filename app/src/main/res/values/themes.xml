@@ -30,4 +30,9 @@
         <item name="android:selectedWeekBackgroundColor">@color/secondry_butto</item>
         <item name="android:datePickerMode">calendar</item>
     </style>
+    
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/zoom_in</item>
+        <item name="android:windowExitAnimation">@anim/zoom_out</item>
+    </style>
 </resources>

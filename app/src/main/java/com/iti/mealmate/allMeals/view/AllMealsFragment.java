@@ -1,5 +1,10 @@
 package com.iti.mealmate.allMeals.view;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkRequest;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +15,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -41,6 +48,9 @@ public class AllMealsFragment extends Fragment implements IAllMeals {
     IPresenterAllMeals presenter;
     LinearLayoutManager layoutManager;
     ArrayList<MealModel> mealList = new ArrayList<>();
+    String categoryName;
+    int id;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,8 +99,8 @@ public class AllMealsFragment extends Fragment implements IAllMeals {
 
         binding.resAllMeals.setLayoutManager(layoutManager);
 
-        String categoryName = AllMealsFragmentArgs.fromBundle(getArguments()).getCategoryName();
-        int id = AllMealsFragmentArgs.fromBundle(getArguments()).getId();
+        categoryName = AllMealsFragmentArgs.fromBundle(getArguments()).getCategoryName();
+        id = AllMealsFragmentArgs.fromBundle(getArguments()).getId();
 
         Log.i("Bundle", "onViewCreated: " + categoryName +id);
         setRecV(categoryName, id );
@@ -113,18 +123,69 @@ public class AllMealsFragment extends Fragment implements IAllMeals {
         if(id != 0){
             if(id == 1 ){
                 presenter.getAllMealsByCategory(categoryName);
-                binding.searchTypeTxt.setText(categoryName+" "+binding.searchTypeTxt.getText().toString());
+                binding.searchTypeTxt.setText(categoryName+" Meals:");
                 binding.resAllMeals.setAdapter(adapter);
             }else if(id == 2){
                 presenter.getAllMealsByIngrediant(categoryName);
-                binding.searchTypeTxt.setText(categoryName+" "+binding.searchTypeTxt.getText().toString());
+                binding.searchTypeTxt.setText(categoryName+" Meals:");
                 binding.resAllMeals.setAdapter(adapter);
             }else if(id == 3){
                 presenter.getAllMealsByCountry(categoryName);
-                binding.searchTypeTxt.setText(categoryName+" "+binding.searchTypeTxt.getText().toString());
+                binding.searchTypeTxt.setText(categoryName+" Meals:");
                 binding.resAllMeals.setAdapter(adapter);
             }
         }
+    }
+
+    public void onStart() {
+        super.onStart();
+        NetworkRequest networkRequest = getNetworkRequest();
+
+        Handler mHandler = new Handler(Looper.getMainLooper());
+        ConnectivityManager.NetworkCallback networkCallback = getNetworkCallback(mHandler);
+        ConnectivityManager connectivityManager = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        connectivityManager.requestNetwork(networkRequest , networkCallback);
+    }
+
+    @NonNull
+    private ConnectivityManager.NetworkCallback getNetworkCallback(Handler mHandler) {
+        ConnectivityManager.NetworkCallback networkCallback = new ConnectivityManager.NetworkCallback(){
+            @Override
+            public void onAvailable(@NonNull Network network) {
+                super.onAvailable(network);
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("ISraa", "run: " + "here");
+                        binding.noInternetLayout.setVisibility(View.GONE);
+                        binding.internetAllMeals.setVisibility(View.VISIBLE);
+                        setRecV(categoryName, id );
+                    }
+                });
+            }
+            @Override
+            public void onLost(@NonNull Network network) {
+                super.onLost(network);
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("ISraa", "run: " + "here lost");
+                        binding.internetAllMeals.setVisibility(View.GONE);
+                        binding.noInternetLayout.setVisibility(View.VISIBLE);
+                    }
+                });
+            }
+        };
+        return networkCallback;
+    }
+
+    private static NetworkRequest getNetworkRequest() {
+        NetworkRequest networkRequest = new NetworkRequest.Builder()
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
+                .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+                .build();
+        return networkRequest;
     }
 
     @Override
@@ -142,9 +203,4 @@ public class AllMealsFragment extends Fragment implements IAllMeals {
         dialog.show();
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        binding = null;
-    }
 }

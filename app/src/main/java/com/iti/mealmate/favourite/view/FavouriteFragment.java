@@ -24,6 +24,7 @@ import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 
@@ -33,6 +34,7 @@ public class FavouriteFragment extends Fragment implements IFavourite, OnDeleteC
     AllFavMealsAdapter adapter;
     FavouritePresenter presenter;
     LinearLayoutManager layoutManager;
+    private Disposable disposable;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,7 +51,7 @@ public class FavouriteFragment extends Fragment implements IFavourite, OnDeleteC
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        adapter = new AllFavMealsAdapter(getContext(),this, new ArrayList<>());
+        adapter = new AllFavMealsAdapter(getContext(), this, new ArrayList<>());
         layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         presenter = new FavouritePresenter(MealsRepo.getInstance(RemoteDataSource.getInstance(), LocalFavMealsDataSource.getInstance(getContext())), this);
@@ -58,22 +60,36 @@ public class FavouriteFragment extends Fragment implements IFavourite, OnDeleteC
         presenter.getAllMeal();
     }
 
-    @Override
-    public void setFavMeals(Flowable<List<Meal>> mealList) {
-        mealList.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(item -> adapter.setList((ArrayList<Meal>) item)
-                );
-    }
 
     @Override
     public void onDelClick(Meal meal) {
         presenter.deleteFavMeal(meal);
     }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
+        if (disposable != null && !disposable.isDisposed()) {
+            disposable.dispose();
+        }
         binding = null;
     }
+
+    @Override
+    public void setFavMeals(Flowable<List<Meal>> mealList) {
+        disposable = mealList.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(item -> {
+                    if (item != null && !(item.isEmpty())) {
+                        binding.noInternetImage.setVisibility(View.GONE);
+                        binding.recFav.setVisibility(View.VISIBLE);
+                        adapter.setList((ArrayList<Meal>) item);
+                        adapter.notifyDataSetChanged();
+                    } else {
+                        binding.recFav.setVisibility(View.GONE);
+                        binding.noInternetImage.setVisibility(View.VISIBLE);
+
+                    }
+                });
+    }
+
+
 }

@@ -106,8 +106,8 @@ public class HomeFragment extends Fragment implements IViewHome {
                     @Override
                     public void run() {
                         Log.i("ISraa", "run: " + "here lost");
-                        binding.noInternetLayout.setVisibility(View.VISIBLE);
                         binding.internetHome.setVisibility(View.GONE);
+                        binding.noInternetLayout.setVisibility(View.VISIBLE);
                     }
                 });
             }
@@ -118,10 +118,12 @@ public class HomeFragment extends Fragment implements IViewHome {
     private static NetworkRequest getNetworkRequest() {
         NetworkRequest networkRequest = new NetworkRequest.Builder()
                 .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
                 .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
                 .build();
         return networkRequest;
     }
+
 
     @Override
     public void showMealOfTheDay(MealModel mealModel) {
@@ -158,14 +160,6 @@ public class HomeFragment extends Fragment implements IViewHome {
         dialog.show();
     }
 
-    @Override
-    public void showAllCategories(List<Category> categoryList) {
 
-    }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
 }
