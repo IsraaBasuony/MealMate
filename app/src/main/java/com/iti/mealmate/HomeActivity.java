@@ -72,8 +72,10 @@ public class HomeActivity extends AppCompatActivity {
         loginTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.dismiss();
                 startActivity(new Intent(HomeActivity.this, AuthActivity.class));
                 finish();
+
             }
         });
         close.setOnClickListener(new View.OnClickListener() {

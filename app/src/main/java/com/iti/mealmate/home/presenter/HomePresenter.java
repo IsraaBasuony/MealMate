@@ -6,6 +6,7 @@ import com.iti.mealmate.network.NetworkCallbackAllMeals;
 import com.iti.mealmate.network.NetworkCallbackRandom;
 import com.iti.mealmate.repo.meal.MealsRepo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomePresenter implements IHomePresenter, NetworkCallbackRandom, NetworkCallbackAllMeals {
@@ -32,7 +33,7 @@ public class HomePresenter implements IHomePresenter, NetworkCallbackRandom, Net
 
 
     @Override
-    public void onSuccessRandomResult(List<MealModel> mealModelList) {
+    public void onSuccessRandomResult(ArrayList<MealModel> mealModelList) {
         _view.showMealOfTheDay(mealModelList.get(0));
     }
 

@@ -5,6 +5,8 @@ import com.iti.mealmate.model.CountriesList;
 import com.iti.mealmate.model.IngredientList;
 import com.iti.mealmate.model.MealList;
 import com.iti.mealmate.model.MealModelList;
+
+import io.reactivex.rxjava3.core.Single;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -12,28 +14,28 @@ import retrofit2.http.Query;
 public interface ApiCalls {
 
     @GET("random.php")
-    Call<MealModelList> getRandomMeal();
+    Single<MealModelList> getRandomMeal();
 
     @GET("search.php")
-    Call<MealModelList> getAllMealsByLetter(@Query("f") String letter);
+    Single<MealModelList> getAllMealsByLetter(@Query("f") String letter);
 
     @GET("categories.php")
-    Call<CategoriesList> getAllCategories();
+    Single<CategoriesList> getAllCategories();
 
     @GET("list.php?i=list")
-    Call<IngredientList> getAllIngredients();
+    Single<IngredientList> getAllIngredients();
 
     @GET("list.php?a=list")
-    Call<CountriesList> getAllCountries();
+    Single<CountriesList> getAllCountries();
 
     @GET("lookup.php")
-    Call<MealList> getFullDetailedMeal(@Query("i") String idMeal);
+    Single<MealList> getFullDetailedMeal(@Query("i") String idMeal);
 
     @GET("filter.php")
-    Call<MealModelList> getAllMealsByCategory(@Query("c") String category);
+    Single<MealModelList> getAllMealsByCategory(@Query("c") String category);
     @GET("filter.php")
-    Call<MealModelList> getAllMealsByArea(@Query("a") String area);
+    Single<MealModelList> getAllMealsByArea(@Query("a") String area);
     @GET("filter.php")
-    Call<MealModelList>  getAllMealsByIngredient(@Query("i") String ingredient);
+    Single<MealModelList>  getAllMealsByIngredient(@Query("i") String ingredient);
 
 }

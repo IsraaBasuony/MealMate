@@ -22,7 +22,6 @@ public abstract class MyDataBase extends RoomDatabase {
     public static synchronized MyDataBase getInstance(Context context) {
         if (myDataBase == null) {
             myDataBase = Room.databaseBuilder(context.getApplicationContext(), MyDataBase.class, "MealsDB")
-                    .fallbackToDestructiveMigration()
                     .build();
         }
         return myDataBase;
