@@ -29,18 +29,21 @@ public class FulIngradientAdapter extends RecyclerView.Adapter<FulIngradientAdap
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.ingrediant_item, parent, false));
+        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.ingrediant_layout, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Meal.IngredientMeasures ingredient = ingredientList.get(position);
-        holder.ingredientName.setText(ingredientList.get(position).getMeasure());
+        holder.ingredientName.setText(ingredientList.get(position).getIngredient());
+        holder.ingrediatMeasure.setText(ingredientList.get(position).getMeasure());
 
         String image = String.format("https://www.themealdb.com/images/ingredients/%s.png", ingredient.getIngredient());
         Glide.with(context).load(image).apply(new RequestOptions()
                         .override(80, 80))
-                .placeholder(R.drawable.ic_launcher_foreground).error(R.drawable.ic_launcher_background).into(holder.ingredientThumb);
+                .placeholder(R.drawable.world_pasta_day)
+                .error(R.drawable.world_pasta_day)
+                .into(holder.ingredientThumb);
 
 
     }
@@ -58,12 +61,15 @@ public class FulIngradientAdapter extends RecyclerView.Adapter<FulIngradientAdap
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView ingredientName;
+        TextView ingrediatMeasure;
         ImageView ingredientThumb;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             ingredientName = itemView.findViewById(R.id.ingrediant_txt);
             ingredientThumb = itemView.findViewById(R.id.ingrediant_img);
+            ingrediatMeasure = itemView.findViewById(R.id.measure_txt);
+
         }
     }
 }

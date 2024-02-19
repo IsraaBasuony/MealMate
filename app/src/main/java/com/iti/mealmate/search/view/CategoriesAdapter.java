@@ -21,20 +21,11 @@ import java.util.ArrayList;
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.MyViewHolder> {
     private Context context;
     private ArrayList<Category> categoryList;
-    private OnCategoryClickListener listener;
 
     public CategoriesAdapter(Context _context, ArrayList<Category> _categoryList) {
         this.context = _context;
         this.categoryList = _categoryList;
     }
-
-
-//    public CategoriesAdapter(Context _context, OnCategoryClickListener _listener, ArrayList<Category> _categoryList) {
-//        this.context = _context;
-//        this.categoryList = _categoryList;
-//        this.listener = _listener;
-//    }
-
 
     @NonNull
     @Override
@@ -44,7 +35,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Category category = categoryList.get(position);
         holder.categoryName.setText(categoryList.get(position).getStrCategory());
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +48,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
             }
         });
         Glide.with(holder.itemView.getContext()).load(categoryList.get(position).getStrCategoryThumb())
+                .placeholder(R.drawable.world_pasta_day)
+                .error(R.drawable.world_pasta_day)
                 .into(holder.categoryThumb);
     }
 

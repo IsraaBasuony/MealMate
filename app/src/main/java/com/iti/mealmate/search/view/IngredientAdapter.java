@@ -58,7 +58,9 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.My
         String image=String.format("https://www.themealdb.com/images/ingredients/%s.png", ingredient.getStrIngredient());
         Glide.with(context).load(image).apply(new RequestOptions()
                         .override(80,80))
-                .placeholder(R.drawable.ic_launcher_foreground).error(R.drawable.ic_launcher_background).into(holder.ingredientThumb);
+                .placeholder(R.drawable.world_pasta_day)
+                .error(R.drawable.world_pasta_day)
+                .into(holder.ingredientThumb);
 
     }
 

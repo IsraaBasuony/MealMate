@@ -87,7 +87,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chipGroup"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="54dp"
         app:spanCount="2"
         >
 

@@ -7,6 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -37,7 +39,7 @@ public class AllMealsFragment extends Fragment implements IAllMeals {
     FragmentAllMealsBinding binding;
     AllMealsFromSearchAdapter adapter;
     IPresenterAllMeals presenter;
-    GridLayoutManager layoutManager;
+    LinearLayoutManager layoutManager;
     ArrayList<MealModel> mealList = new ArrayList<>();
 
     @Override
@@ -56,7 +58,8 @@ public class AllMealsFragment extends Fragment implements IAllMeals {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        layoutManager = new GridLayoutManager(getContext(), 2);
+        layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
         adapter = new AllMealsFromSearchAdapter(getContext(),new ArrayList<>());
         presenter = new AllMealsPresenter(this, MealsRepo.getInstance(RemoteDataSource.getInstance(), LocalFavMealsDataSource.getInstance(getContext())));
         binding.searchMealBox.addTextChangedListener(new TextWatcher() {
@@ -110,12 +113,15 @@ public class AllMealsFragment extends Fragment implements IAllMeals {
         if(id != 0){
             if(id == 1 ){
                 presenter.getAllMealsByCategory(categoryName);
+                binding.searchTypeTxt.setText(categoryName+" "+binding.searchTypeTxt.getText().toString());
                 binding.resAllMeals.setAdapter(adapter);
             }else if(id == 2){
                 presenter.getAllMealsByIngrediant(categoryName);
+                binding.searchTypeTxt.setText(categoryName+" "+binding.searchTypeTxt.getText().toString());
                 binding.resAllMeals.setAdapter(adapter);
             }else if(id == 3){
                 presenter.getAllMealsByCountry(categoryName);
+                binding.searchTypeTxt.setText(categoryName+" "+binding.searchTypeTxt.getText().toString());
                 binding.resAllMeals.setAdapter(adapter);
             }
         }

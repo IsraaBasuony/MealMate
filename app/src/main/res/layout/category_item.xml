@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="4dp"
-
-    >
+    android:padding="4dp">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/category_card"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
         android:layout_margin="8dp"
         android:checkable="true"
         android:clickable="true"
         android:elevation="8dp"
         android:focusable="true"
-        app:cardCornerRadius="40dp"
+        app:cardCornerRadius="20dp"
         app:cardElevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,35 +22,41 @@
         app:layout_constraintTop_toTopOf="parent"
         app:strokeWidth="0dp">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
+
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/category_img"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 app:civ_border_color="@color/secondry_butto"
-                app:civ_border_width="1dp" />
+                app:civ_border_width="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.317"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/category_txt"
+                style="@style/poppinsMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:padding="2dp"
+                android:layout_marginStart="24dp"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="@+id/category_img"
+                app:layout_constraintStart_toEndOf="@id/category_img"
+                app:layout_constraintTop_toTopOf="@+id/category_img" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/category_txt"
-            style="@style/poppinsMedium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:maxLines="2"
-            android:padding="2dp"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            android:textSize="14sp" />
 
     </com.google.android.material.card.MaterialCardView>
 

@@ -60,6 +60,8 @@ public class AllMealsAdapter extends RecyclerView.Adapter<AllMealsAdapter.MyView
             }
         });
         Glide.with(holder.itemView.getContext()).load(mealModelArrayList.get(position).getStrMealThumb())
+                .placeholder(R.drawable.world_pasta_day)
+                .error(R.drawable.world_pasta_day)
                 .into(holder.mealThumb);
     }
 

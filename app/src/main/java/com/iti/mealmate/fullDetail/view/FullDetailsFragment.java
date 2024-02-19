@@ -99,24 +99,9 @@ public class FullDetailsFragment extends Fragment implements IFullDetails {
         Glide.with(getContext())
                 .load(meal.getStrMealThumb())
                 .apply(new RequestOptions())
-                .error(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.world_pasta_day)
+                .error(R.drawable.world_pasta_day)
                 .into(binding.mealImg);
-        Glide.with(getContext())
-                .asBitmap()
-                .load(meal.getStrMealThumb())
-                .apply(new RequestOptions().override(200, 200))
-                .into(new CustomTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                        Log.i("TAG", "onResourceReady: ");
-                        meal.setImage(resource);
-                        binding.mealImg.setImageBitmap(resource);
-                    }
-
-                    @Override
-                    public void onLoadCleared(@Nullable Drawable placeholder) {
-                    }
-                });
 
 
         binding.areaName.setText(meal.getStrArea());
@@ -134,7 +119,6 @@ public class FullDetailsFragment extends Fragment implements IFullDetails {
                 }
 
                 presenter.addToFav(meal);
-                Log.i("TAG", "onClick: " + meal.getImage().getByteCount());
                 Toast.makeText(getContext(), "added to Favourite", Toast.LENGTH_SHORT).show();
             }
         });

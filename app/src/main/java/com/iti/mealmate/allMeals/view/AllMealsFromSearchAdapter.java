@@ -42,7 +42,7 @@ public class AllMealsFromSearchAdapter extends RecyclerView.Adapter<AllMealsFrom
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.lazy_meal_item, parent, false));
+        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.meal_item, parent, false));
     }
 
     @Override
@@ -80,9 +80,9 @@ public class AllMealsFromSearchAdapter extends RecyclerView.Adapter<AllMealsFrom
         CardView cardView;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            mealName = itemView.findViewById(R.id.title_txt);
-            mealThumb = itemView.findViewById(R.id.lazy_meal_img);
-            cardView = itemView.findViewById(R.id.lazy_meal_card);
+            mealName = itemView.findViewById(R.id.title_meal_txt);
+            mealThumb = itemView.findViewById(R.id.meal_img);
+            cardView = itemView.findViewById(R.id.meal_card);
 
         }
 

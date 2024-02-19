@@ -3,14 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="8dp"
-    >
+    android:padding="8dp">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/ingrediant_card"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_margin="8dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_margin="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,9 +26,8 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="4dp"
-                 />
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp" />
 
             <TextView
                 android:id="@+id/ingrediant_txt"
@@ -38,10 +36,20 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:paddingBottom="6dp"
+                android:layout_marginBottom="4dp"
                 android:textAppearance="?attr/textAppearanceHeadline6"
-                android:textSize="11sp"
-                />
+                android:textSize="11sp" />
+
+            <TextView
+                android:id="@+id/measure_txt"
+                style="@style/poppinsMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="11sp" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 

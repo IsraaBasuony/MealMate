@@ -7,6 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -38,6 +40,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
     FragmentSearchBinding binding;
     SearchPresenter searchPresenter;
     GridLayoutManager layoutManager;
+    LinearLayoutManager linearLayoutManager;
     CategoriesAdapter categoriesAdapter;
     CountriesAdapter countriesAdapter;
     IngredientAdapter ingredientAdapter;
@@ -65,9 +68,11 @@ public class SearchFragment extends Fragment implements ISearchFragment {
         categoriesAdapter = new CategoriesAdapter(getContext(), new ArrayList<>());
         countriesAdapter = new CountriesAdapter(getContext(), new ArrayList<>());
         ingredientAdapter = new IngredientAdapter(getContext(), new ArrayList<>());
-        layoutManager = new GridLayoutManager(getContext(), 2);
-        binding.searchRecDefault.setLayoutManager(layoutManager);
+        layoutManager = new GridLayoutManager(getContext(), 3);
+        linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         searchPresenter = new SearchPresenter(this, MealsRepo.getInstance(RemoteDataSource.getInstance(), LocalFavMealsDataSource.getInstance(getContext())));
+
 
         if (getArguments() != null) {
             type = getArguments().getString("type");
@@ -156,16 +161,19 @@ public class SearchFragment extends Fragment implements ISearchFragment {
                         case "Country":
                             binding.searchBoxLayout.setHint("Search by Country");
                             searchPresenter.getAllCountries();
+                            binding.searchRecDefault.setLayoutManager(layoutManager);
                             binding.searchRecDefault.setAdapter(countriesAdapter);
                             break;
                         case "Ingredient":
                             binding.searchBoxLayout.setHint("Search by Ingredient");
                             searchPresenter.getAllIngredients();
+                            binding.searchRecDefault.setLayoutManager(layoutManager);
                             binding.searchRecDefault.setAdapter(ingredientAdapter);
                             break;
                         case "Category":
                             binding.searchBoxLayout.setHint("Search by Category");
                             searchPresenter.getCategories();
+                            binding.searchRecDefault.setLayoutManager(linearLayoutManager);
                             binding.searchRecDefault.setAdapter(categoriesAdapter);
                             break;
                     }

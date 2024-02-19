@@ -3,47 +3,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/country_card"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_margin="8dp"
-        android:checkable="true"
-        android:clickable="true"
-        android:focusable="true"
-        app:cardElevation="0dp"
-        app:cardCornerRadius="8dp"
-        android:elevation="8dp"
-        android:backgroundTint="#B3FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        >
+        app:strokeWidth="0dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/flag_img"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            app:civ_border_color="@color/secondry_butto"
-            app:civ_border_width="1dp" />
-        <TextView
-            android:id="@+id/country_txt"
-            style="@style/poppinsMedium"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:padding="2dp"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            android:textSize="14sp" />
-    </LinearLayout>
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/flag_img"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/country_txt"
+                style="@style/poppinsMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingBottom="6dp"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="11sp" />
+        </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
