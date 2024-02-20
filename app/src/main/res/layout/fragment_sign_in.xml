@@ -5,8 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".signIn.view.SignInFragment">
-
-
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/dish1"
         android:layout_width="80dp"
@@ -23,8 +21,8 @@
         android:id="@+id/dish2"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginTop="300dp"
-        android:layout_marginEnd="280dp"
+        android:layout_marginTop="308dp"
+        android:layout_marginEnd="308dp"
         android:src="@drawable/back"
         app:civ_border_color="@color/primary_button"
         app:civ_border_width="2dp"

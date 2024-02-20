@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +14,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.iti.mealmate.AuthActivity;
+import com.iti.mealmate.R;
 import com.iti.mealmate.databinding.FragmentProfileBinding;
 import com.iti.mealmate.db.favouriteMeal.LocalFavMealsDataSource;
 import com.iti.mealmate.db.plannedMeal.LocalPlannedMealsDataSource;
+import com.iti.mealmate.model.UserSharedPref;
 import com.iti.mealmate.network.RemoteDataSource;
 import com.iti.mealmate.profile.presenter.ProfilePresenter;
 import com.iti.mealmate.repo.meal.MealsRepo;
@@ -43,6 +46,7 @@ public class ProfileFragment extends Fragment implements IProfile{
         super.onViewCreated(view, savedInstanceState);
 
         presenter = new ProfilePresenter(this, PlannedMealRepo.getInstance(RemoteDataSource.getInstance(), LocalPlannedMealsDataSource.getInstance(getContext())), MealsRepo.getInstance(RemoteDataSource.getInstance(), LocalFavMealsDataSource.getInstance(getContext())));
+        binding.name.setText(UserSharedPref.getUserName());
         binding.logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,6 +54,18 @@ public class ProfileFragment extends Fragment implements IProfile{
                 Intent intent = new Intent(getActivity(), AuthActivity.class);
                 startActivity(intent);
                 getActivity().finish();
+            }
+        });
+        binding.fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.favouriteFragment);
+            }
+        });
+        binding.planned.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.calenderFragment);
             }
         });
     }
