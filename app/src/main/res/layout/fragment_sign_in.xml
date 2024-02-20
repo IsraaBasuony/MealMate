@@ -5,29 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".signIn.view.SignInFragment">
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/dish1"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="340dp"
-        android:layout_marginTop="28dp"
-        android:src="@drawable/back3"
-        app:civ_border_color="@color/primary_button"
-        app:civ_border_width="2dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/dish2"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="308dp"
-        android:layout_marginEnd="308dp"
-        android:src="@drawable/back"
-        app:civ_border_color="@color/primary_button"
-        app:civ_border_width="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/dish3"
@@ -45,19 +24,18 @@
         android:id="@+id/dish4"
         android:layout_width="180dp"
         android:layout_height="180dp"
-        android:layout_marginTop="650dp"
+        android:layout_marginStart="296dp"
+        android:layout_marginTop="676dp"
         android:src="@drawable/back11"
         app:civ_border_color="@color/primary_button"
         app:civ_border_width="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#57040404"
+        android:background="#27858282"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.3" />
@@ -80,10 +58,10 @@
             style="@style/poppinsBold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="Sign in"
-            android:textAlignment="center"
             android:textColor="@color/primary"
-            android:textSize="36sp" />
+            android:textSize="24sp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/UserNameLayout"
@@ -105,7 +83,7 @@
                 android:id="@+id/UserNameEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textSize="14sp"
 
                 />
         </com.google.android.material.textfield.TextInputLayout>
@@ -136,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:maxLength="20"
-                android:textSize="18dp"
+                android:textSize="14dp"
 
                 />
         </com.google.android.material.textfield.TextInputLayout>
@@ -151,7 +129,7 @@
             android:layout_marginEnd="16dp"
             android:backgroundTint="@color/primary_button"
             android:text="@string/sign_in"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:cornerRadius="20dp" />
 
         <Button
@@ -164,37 +142,38 @@
             android:layout_marginEnd="16dp"
             android:backgroundTint="@color/secondry_butto"
             android:text="@string/continue_with_google"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:cornerRadius="20dp"
             app:icon="@drawable/googleg_standard_color_18"
             app:iconTintMode="multiply" />
 
 
-        <Button
-            android:id="@+id/guest"
-            style="@style/poppinsBold"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:backgroundTint="@color/primary_button"
-            android:text="@string/sign_in"
-            android:textSize="18sp"
-            app:cornerRadius="20dp" />
         <TextView
             android:id="@+id/signUpRedirectText"
             style="@style/poppinsRegular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:padding="8dp"
             android:text="Not yet registered? Sign Up"
-            android:textAlignment="center"
             android:textColor="@color/primary"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/guest"
+        style="@style/poppinsBold"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/secondry_butto"
+        android:text="Skip"
+        android:textSize="18sp"
+        app:cornerRadius="20dp"
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

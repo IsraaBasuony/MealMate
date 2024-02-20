@@ -62,6 +62,14 @@ public class SignUpFragment extends Fragment implements IViewSignUp{
                validation();
             }
         });
+
+        binding.guest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), HomeActivity.class));
+                getActivity().finish();
+            }
+        });
     }
 
     private void  validation() {
