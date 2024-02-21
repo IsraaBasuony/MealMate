@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,7 +47,7 @@ public class AllMealsFragment extends Fragment implements IAllMeals {
     IPresenterAllMeals presenter;
     LinearLayoutManager layoutManager;
     ArrayList<MealModel> mealList = new ArrayList<>();
-    String categoryName;
+    String typeName;
     int id;
 
 
@@ -99,11 +98,11 @@ public class AllMealsFragment extends Fragment implements IAllMeals {
 
         binding.resAllMeals.setLayoutManager(layoutManager);
 
-        categoryName = AllMealsFragmentArgs.fromBundle(getArguments()).getCategoryName();
+        typeName = AllMealsFragmentArgs.fromBundle(getArguments()).getCategoryName();
         id = AllMealsFragmentArgs.fromBundle(getArguments()).getId();
 
-        Log.i("Bundle", "onViewCreated: " + categoryName +id);
-        setRecV(categoryName, id );
+        Log.i("Bundle", "onViewCreated: " + typeName +id);
+        setRecV(typeName, id );
 
 
     }
@@ -119,19 +118,19 @@ public class AllMealsFragment extends Fragment implements IAllMeals {
     }
 
 
-    private void  setRecV(String categoryName, int id){
+    private void  setRecV(String typeName, int id){
         if(id != 0){
             if(id == 1 ){
-                presenter.getAllMealsByCategory(categoryName);
-                binding.searchTypeTxt.setText(categoryName+" Meals:");
+                presenter.getAllMealsByCategory(typeName);
+                binding.searchTypeTxt.setText(typeName+" Meals:");
                 binding.resAllMeals.setAdapter(adapter);
             }else if(id == 2){
-                presenter.getAllMealsByIngrediant(categoryName);
-                binding.searchTypeTxt.setText(categoryName+" Meals:");
+                presenter.getAllMealsByIngrediant(typeName);
+                binding.searchTypeTxt.setText(typeName+" Meals:");
                 binding.resAllMeals.setAdapter(adapter);
             }else if(id == 3){
-                presenter.getAllMealsByCountry(categoryName);
-                binding.searchTypeTxt.setText(categoryName+" Meals:");
+                presenter.getAllMealsByCountry(typeName);
+                binding.searchTypeTxt.setText(typeName+" Meals:");
                 binding.resAllMeals.setAdapter(adapter);
             }
         }
@@ -158,8 +157,8 @@ public class AllMealsFragment extends Fragment implements IAllMeals {
                     public void run() {
                         Log.i("ISraa", "run: " + "here");
                         binding.noInternetLayout.setVisibility(View.GONE);
-                        binding.internetAllMeals.setVisibility(View.VISIBLE);
-                        setRecV(categoryName, id );
+                        binding.loading.setVisibility(View.VISIBLE);
+                        setRecV(typeName, id );
                     }
                 });
             }
@@ -190,6 +189,10 @@ public class AllMealsFragment extends Fragment implements IAllMeals {
 
     @Override
     public void showAllMeals(List<MealModel> mealsList) {
+
+        binding.loading.setVisibility(View.GONE);
+        binding.internetAllMeals.setVisibility(View.VISIBLE);
+
         adapter.setList((ArrayList<MealModel>) mealsList);
         this.mealList = (ArrayList<MealModel>) mealsList;
     }

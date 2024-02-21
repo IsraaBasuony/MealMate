@@ -16,7 +16,10 @@ import android.widget.Toast;
 import com.iti.mealmate.HomeActivity;
 import com.iti.mealmate.R;
 import com.iti.mealmate.databinding.FragmentSignInBinding;
+import com.iti.mealmate.db.favouriteMeal.LocalFavMealsDataSource;
 import com.iti.mealmate.model.UserSharedPref;
+import com.iti.mealmate.network.RemoteDataSource;
+import com.iti.mealmate.repo.meal.MealsRepo;
 import com.iti.mealmate.signIn.presenter.ISignInPresenter;
 import com.iti.mealmate.signIn.presenter.SignInPresenter;
 
@@ -45,7 +48,7 @@ public class SignInFragment extends Fragment implements IViewSignIn {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        _signInPresenter = new SignInPresenter(this);
+        _signInPresenter = new SignInPresenter(this, MealsRepo.getInstance(RemoteDataSource.getInstance(), LocalFavMealsDataSource.getInstance(getContext())));
         binding.signUpRedirectText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,6 +112,7 @@ public class SignInFragment extends Fragment implements IViewSignIn {
 
     @Override
     public void onLoginSuccess(String userId) {
+        _signInPresenter.getFavMeals();
         Intent intent = new Intent(getActivity(), HomeActivity.class);
         startActivity(intent);
         getActivity().finish();

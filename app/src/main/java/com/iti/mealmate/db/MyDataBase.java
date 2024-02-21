@@ -13,7 +13,7 @@ import com.iti.mealmate.db.plannedMeal.PlannedMealDAO;
 import com.iti.mealmate.model.Meal;
 import com.iti.mealmate.model.PlannedMeal;
 
-@Database(entities = {Meal.class, PlannedMeal.class}, version = 4)
+@Database(entities = {Meal.class, PlannedMeal.class}, version = 5)
 @TypeConverters({Converters.class, MealConverter.class})
 public abstract class MyDataBase extends RoomDatabase {
     private static MyDataBase myDataBase = null;
@@ -21,7 +21,7 @@ public abstract class MyDataBase extends RoomDatabase {
     public abstract PlannedMealDAO getPlannedDAO();
     public static synchronized MyDataBase getInstance(Context context) {
         if (myDataBase == null) {
-            myDataBase = Room.databaseBuilder(context.getApplicationContext(), MyDataBase.class, "MealsDB")
+            myDataBase = Room.databaseBuilder(context.getApplicationContext(), MyDataBase.class, "MealsDB").fallbackToDestructiveMigration()
                     .build();
         }
         return myDataBase;

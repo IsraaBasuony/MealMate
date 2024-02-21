@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 
 public class UserSharedPref {
 
-
     private static Context appContext;
     private static final String SHARED_PREFERENCES_NAME = "user data";
     private static final String USER_ID = "userId";
@@ -26,7 +25,7 @@ public class UserSharedPref {
     }
 
     public static String getUserName() {
-        return sharedPreferences.getString(USER_NAME, null);
+        return sharedPreferences.getString(USER_NAME, "");
     }
 
     public static void setUserEmail(String userEmail) {
@@ -34,17 +33,10 @@ public class UserSharedPref {
         editor.putString(USER_EMAIL, userEmail).apply();
     }
 
-    public static String getUserEmail() {
-        return sharedPreferences.getString(USER_EMAIL, null);
-    }
 
     public static void setUserPassword(String userPassword) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(USER_PASSWORD, userPassword).apply();
-    }
-
-    public static String getUserPassword() {
-        return sharedPreferences.getString(USER_PASSWORD, null);
     }
 
     public static void setUserId(String userEmail) {
@@ -54,7 +46,7 @@ public class UserSharedPref {
 
     public static String getUserId() {
         if(sharedPreferences.contains(USER_ID )){
-            return sharedPreferences.getString(USER_ID, null);
+            return sharedPreferences.getString(USER_ID, "");
         }
         return null;
     }

@@ -20,8 +20,8 @@ public class WelcomActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         Animation scaleAnimation = new ScaleAnimation(
-                0.2f, 1f,
-                0.2f, 1f,
+                0.3f, 1f,
+                0.3f, 1f,
                 Animation.RELATIVE_TO_SELF, 0.5f,
                 Animation.RELATIVE_TO_SELF, 0.5f
         );

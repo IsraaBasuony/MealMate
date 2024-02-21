@@ -20,6 +20,14 @@ public class PlannedMeal {
     public PlannedMeal() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public PlannedMeal(@NonNull int id, Meal meal, String date) {
         this.id = id;
         this.meal = meal;

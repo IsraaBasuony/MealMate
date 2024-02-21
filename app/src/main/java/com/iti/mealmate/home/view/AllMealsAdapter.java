@@ -14,6 +14,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.iti.mealmate.R;
 import com.iti.mealmate.model.MealModel;
 
@@ -60,6 +61,7 @@ public class AllMealsAdapter extends RecyclerView.Adapter<AllMealsAdapter.MyView
             }
         });
         Glide.with(holder.itemView.getContext()).load(mealModelArrayList.get(position).getStrMealThumb())
+                .apply(new RequestOptions())
                 .placeholder(R.drawable.world_pasta_day)
                 .error(R.drawable.world_pasta_day)
                 .into(holder.mealThumb);

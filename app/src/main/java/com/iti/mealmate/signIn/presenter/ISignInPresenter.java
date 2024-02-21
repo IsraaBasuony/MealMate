@@ -6,5 +6,4 @@ public interface ISignInPresenter {
 
     void getFavMeals();
 
-    void getWeekMeals();
 }

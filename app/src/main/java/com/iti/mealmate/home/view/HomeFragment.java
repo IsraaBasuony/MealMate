@@ -28,7 +28,6 @@ import com.iti.mealmate.R;
 import com.iti.mealmate.databinding.FragmentHomeBinding;
 import com.iti.mealmate.db.favouriteMeal.LocalFavMealsDataSource;
 import com.iti.mealmate.home.presenter.HomePresenter;
-import com.iti.mealmate.model.Category;
 import com.iti.mealmate.model.MealModel;
 import com.iti.mealmate.network.RemoteDataSource;
 import com.iti.mealmate.repo.meal.MealsRepo;
@@ -92,7 +91,7 @@ public class HomeFragment extends Fragment implements IViewHome {
                     public void run() {
                         Log.i("ISraa", "run: " + "here");
                         binding.noInternetLayout.setVisibility(View.GONE);
-                        binding.internetHome.setVisibility(View.VISIBLE);
+                        binding.loading.setVisibility(View.VISIBLE);
                         homePresenter.getRandomMeal();
                         homePresenter.getAllMeals();
                     }
@@ -126,8 +125,17 @@ public class HomeFragment extends Fragment implements IViewHome {
 
     @Override
     public void showMealOfTheDay(MealModel mealModel) {
+
+        binding.loading.setVisibility(View.GONE);
+        binding.internetHome.setVisibility(View.VISIBLE);
         binding.titleTxt.setText(mealModel.getStrMeal());
         binding.discribtionTxt.setText(mealModel.getStrInstructions());
+        Glide.with(getContext())
+                .load(mealModel.getStrMealThumb())
+                .apply(new RequestOptions())
+                .placeholder(R.drawable.world_pasta_day)
+                .error(R.drawable.world_pasta_day)
+                .into(binding.inspirationImg);
         binding.inspirationCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -138,16 +146,13 @@ public class HomeFragment extends Fragment implements IViewHome {
 
             }
         });
-        Glide.with(getContext())
-                .load(mealModel.getStrMealThumb())
-                .apply(new RequestOptions())
-                .placeholder(R.drawable.world_pasta_day)
-                .error(R.drawable.world_pasta_day)
-                .into(binding.inspirationImg);
+
     }
 
     @Override
     public void showAllMeals(List<MealModel> meals) {
+        binding.loading.setVisibility(View.GONE);
+        binding.internetHome.setVisibility(View.VISIBLE);
         adapter.setList((ArrayList<MealModel>) meals);
     }
 

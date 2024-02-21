@@ -37,7 +37,7 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(new Intent(SplashActivity.this, WelcomActivity.class));
                     finish();
                 }
-                else if(UserSharedPref.getUserId()==null){
+                else if(UserSharedPref.getUserId().isEmpty()){
                     startActivity(new Intent(SplashActivity.this, AuthActivity.class));
                     finish();
                 }else{
@@ -46,6 +46,5 @@ public class SplashActivity extends AppCompatActivity {
                 }
             }
         }, 3000);
-
     }
 }

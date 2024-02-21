@@ -75,7 +75,7 @@ public class FullDetailsFragment extends Fragment implements IFullDetails {
 
         presenter = new FullDetailsPresenter(this, MealsRepo.getInstance(RemoteDataSource.getInstance(), LocalFavMealsDataSource.getInstance(getContext())), PlannedMealRepo.getInstance(RemoteDataSource.getInstance(), LocalPlannedMealsDataSource.getInstance(getContext())));
 
-        if(UserSharedPref.getUserId()== null){
+        if(UserSharedPref.getUserId().isEmpty()){
             binding.btntnFav.setVisibility(View.GONE);
             binding.btnCalenar.setVisibility(View.GONE);
         }
@@ -122,9 +122,8 @@ public class FullDetailsFragment extends Fragment implements IFullDetails {
                 } else {
                     binding.btntnFav.setImageResource(R.drawable.ic_fav_unfill);
                 }
-
                 presenter.addToFav(meal);
-                Toast.makeText(getContext(), "added to Favourite", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "successfully added", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -146,6 +145,7 @@ public class FullDetailsFragment extends Fragment implements IFullDetails {
                                 String date = ""+dayOfMonth+""+month+""+year;
                                 PlannedMeal plannedMeal = new PlannedMeal(meal, date);
                                 presenter.addToPlan(plannedMeal);
+                                Toast.makeText(getContext(), "successfully added", Toast.LENGTH_SHORT).show();
                             }
                         }, year, month, day);
                 datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 100);

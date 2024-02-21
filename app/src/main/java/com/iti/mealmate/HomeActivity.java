@@ -41,7 +41,7 @@ public class HomeActivity extends AppCompatActivity {
                 bottomNavigationView.setVisibility(View.VISIBLE);
             }
         });
-        if (UserSharedPref.getUserId() == null) {
+        if (UserSharedPref.getUserId().isEmpty()) {
             bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
                 if (item.getItemId() == R.id.favouriteFragment || item.getItemId() == R.id.profileFragment || item.getItemId() == R.id.calenderFragment)
                     showLoginPopup();

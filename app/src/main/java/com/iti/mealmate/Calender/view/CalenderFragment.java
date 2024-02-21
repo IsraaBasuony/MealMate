@@ -1,5 +1,6 @@
 package com.iti.mealmate.Calender.view;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,7 +13,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -46,6 +50,7 @@ public class CalenderFragment extends Fragment implements ICalender, OnDeleteCli
     AllPlannedMealsAdapter adapter;
     LinearLayoutManager layoutManager;
     String date;
+    Dialog dialog;
 
 
     @Override
@@ -83,7 +88,7 @@ public class CalenderFragment extends Fragment implements ICalender, OnDeleteCli
 
     @Override
     public void setPlannedMeal(Flowable<List<PlannedMeal>> mealList) {
-       mealList
+        mealList
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(plannedMeals -> filterPlannedMealsByDate(plannedMeals)) // Filter by date
@@ -121,8 +126,36 @@ public class CalenderFragment extends Fragment implements ICalender, OnDeleteCli
 
     @Override
     public void onDelClick(PlannedMeal meal) {
-
-        presenter.deletePlannedMeal(meal);
+        showDeletePopup(meal);
     }
+
+    private void showDeletePopup(PlannedMeal meal) {
+
+        dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.custome_delete_layout);
+        dialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
+        TextView txt = dialog.findViewById(R.id.delete_txt);
+        txt.setText("Are you sure to delete\n your Planned Meal?");
+        Button delete = dialog.findViewById(R.id.delete_btn);
+        ImageButton close = dialog.findViewById(R.id.btn_close_delet);
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                presenter.deletePlannedMeal(meal);
+                Toast.makeText(getActivity(), "Successfully deleted", Toast.LENGTH_SHORT).show();
+            }
+        });
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                Toast.makeText(getActivity(), "Canceled", Toast.LENGTH_SHORT).show();
+            }
+        });
+        dialog.show();
+    }
+
 
 }

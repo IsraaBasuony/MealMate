@@ -40,11 +40,6 @@ public class MealsRepo implements IMealsRepo {
         this.localDataSource = localFavMealsDataSource;
     }
 
-    private  MealsRepo(RemoteDataSource remoteDataSource, LocalPlannedMealsDataSource localPlannedMealsDataSource){
-        this.remoteDataSource = remoteDataSource;
-        this.localPlannedMealsDataSource = localPlannedMealsDataSource;
-    }
-
 
     @Override
     public void getRandom(NetworkCallbackRandom networkCallbackRandom) {

@@ -1,5 +1,7 @@
 package com.iti.mealmate.favourite.view;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,7 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.iti.mealmate.AuthActivity;
+import com.iti.mealmate.HomeActivity;
+import com.iti.mealmate.R;
 import com.iti.mealmate.databinding.FragmentFavouriteBinding;
 import com.iti.mealmate.db.favouriteMeal.LocalFavMealsDataSource;
 import com.iti.mealmate.favourite.presenter.FavouritePresenter;
@@ -35,6 +44,7 @@ public class FavouriteFragment extends Fragment implements IFavourite, OnDeleteC
     FavouritePresenter presenter;
     LinearLayoutManager layoutManager;
     private Disposable disposable;
+    Dialog dialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,11 +70,39 @@ public class FavouriteFragment extends Fragment implements IFavourite, OnDeleteC
         presenter.getAllMeal();
     }
 
-
     @Override
     public void onDelClick(Meal meal) {
-        presenter.deleteFavMeal(meal);
+        showDeletePopup(meal);
     }
+    private void showDeletePopup(Meal meal) {
+
+        dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.custome_delete_layout);
+        dialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
+        TextView txt = dialog.findViewById(R.id.delete_txt);
+        txt.setText("Are you sure to delete\n your Favourite Meal?");
+        Button delete = dialog.findViewById(R.id.delete_btn);
+        ImageButton close = dialog.findViewById(R.id.btn_close_delet);
+
+       delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                presenter.deleteFavMeal(meal);
+                Toast.makeText(getActivity(), "Successfully deleted", Toast.LENGTH_SHORT).show();
+            }
+        });
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                Toast.makeText(getActivity(), "Canceled", Toast.LENGTH_SHORT).show();
+            }
+        });
+        dialog.show();
+    }
+
+
     public void onDestroy() {
         super.onDestroy();
         if (disposable != null && !disposable.isDisposed()) {

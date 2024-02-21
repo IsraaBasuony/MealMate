@@ -207,18 +207,24 @@ public class SearchFragment extends Fragment implements ISearchFragment {
                     public void run() {
                         Log.i("ISraa", "run: " + "here");
                         binding.noInternetLayout.setVisibility(View.GONE);
-                        binding.internetSearch.setVisibility(View.VISIBLE);
+                        binding.loading.setVisibility(View.VISIBLE);
                         if (getArguments() != null) {
                             type = getArguments().getString("type");
                             switch (type) {
                                 case "Category":
                                     searchPresenter.getCategories();
+                                    binding.searchRecDefault.setLayoutManager(linearLayoutManager);
+                                    binding.searchRecDefault.setAdapter(categoriesAdapter);
                                     break;
                                 case "Country":
                                     searchPresenter.getAllCountries();
+                                    binding.searchRecDefault.setLayoutManager(layoutManager);
+                                    binding.searchRecDefault.setAdapter(countriesAdapter);
                                     break;
                                 case "Ingredient":
                                     searchPresenter.getAllIngredients();
+                                    binding.searchRecDefault.setLayoutManager(layoutManager);
+                                    binding.searchRecDefault.setAdapter(ingredientAdapter);
                                     break;
                             }
                         } else {
@@ -259,6 +265,9 @@ public class SearchFragment extends Fragment implements ISearchFragment {
     public void showAllCategories(List<Category> categoryList) {
         this.categoryList = (ArrayList<Category>) categoryList;
         setType("Category");
+        binding.loading.setVisibility(View.GONE);
+        binding.internetSearch.setVisibility(View.VISIBLE);
+
         categoriesAdapter.setList((ArrayList<Category>) categoryList);
         binding.searchRecDefault.setAdapter(categoriesAdapter);
     }
@@ -267,6 +276,8 @@ public class SearchFragment extends Fragment implements ISearchFragment {
     public void showAllIngredients(List<Ingredient> ingredientList) {
         this.ingredientList = (ArrayList<Ingredient>) ingredientList;
         setType("Ingredient");
+        binding.loading.setVisibility(View.GONE);
+        binding.internetSearch.setVisibility(View.VISIBLE);
         ingredientAdapter.setList((ArrayList<Ingredient>) ingredientList);
         binding.searchRecDefault.setAdapter(ingredientAdapter);
         Log.i("Israa", "showAllIngredients: " + ingredientList.get(1).getStrIngredient());
@@ -276,6 +287,8 @@ public class SearchFragment extends Fragment implements ISearchFragment {
     public void showAllCountries(List<Country> countryList) {
         this.countryList = (ArrayList<Country>) countryList;
         setType("Country");
+        binding.loading.setVisibility(View.GONE);
+        binding.internetSearch.setVisibility(View.VISIBLE);
         countriesAdapter.setList((ArrayList<Country>) countryList);
         binding.searchRecDefault.setAdapter(countriesAdapter);
     }
